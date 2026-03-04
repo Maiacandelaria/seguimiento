@@ -4,418 +4,506 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ingeniería Electrónica · Plan 2012</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--border:#30363d;
-  --text:#c9d1d9;--muted:#6e7681;--accent:#58a6ff;
-  --pend-bg:#161b22;--pend-bd:#30363d;--pend-tx:#8b949e;
-  --reg-bg:#271d04;--reg-bd:#d29922;--reg-tx:#e3b341;
-  --apr-bg:#0d1f0f;--apr-bd:#238636;--apr-tx:#3fb950;
-  --can-bg:#0c1929;--can-bd:#1f6feb;--can-tx:#58a6ff;
-  --lock-bg:#120d18;--lock-bd:#6e40c9;--lock-tx:#7d4bcf;
-}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:13px;min-height:100vh}
+  --bg:#f5eef8;
+  --surface:#fff;
+  --border-dashed:rgba(180,120,200,.25);
 
-/* ── HEADER ── */
+  /* Card states */
+  --apr-bg:#b5135c;   --apr-tx:#fff;
+  --reg-bg:#e0306a;   --reg-tx:#fff;
+  --can-bg:#c5c8e6;   --can-tx:#38306a;
+  --pend-bg:#ddd8ea;  --pend-tx:#9090b8;
+  --lock-bg:#e8e2f0;  --lock-tx:#b8b0cc;
+}
+body{
+  background:var(--bg);
+  font-family:'Nunito',sans-serif;
+  font-size:13px;
+  min-height:100vh;
+  background-image:
+    radial-gradient(ellipse at 0% 0%, rgba(230,100,180,.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 100%, rgba(130,80,200,.07) 0%, transparent 55%);
+}
+
+/* ══ HEADER ══════════════════════════════════════════════════ */
 header{
-  background:var(--bg2);border-bottom:1px solid var(--border);
-  padding:12px 20px;display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:300;
+  background:linear-gradient(120deg,#d42070 0%,#9030c0 55%,#6020b0 100%);
+  padding:14px 26px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+  position:sticky;top:0;z-index:500;
+  box-shadow:0 4px 24px rgba(180,30,120,.35);
 }
-.hdr-title h1{font-family:'Space Grotesk',sans-serif;font-size:1em;font-weight:700;color:#fff;letter-spacing:.01em}
-.hdr-title p{font-size:.68em;color:var(--muted);margin-top:1px}
-.hdr-right{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-
-/* Progress */
-.prog-group{display:flex;gap:14px;align-items:center}
-.prog-item{display:flex;flex-direction:column;gap:3px;min-width:110px}
-.prog-label{font-size:.6em;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;display:flex;justify-content:space-between}
-.prog-bar{height:4px;background:var(--bg3);border-radius:4px;overflow:hidden}
-.prog-fill{height:100%;border-radius:4px;transition:width .5s ease}
-.pi-apr .prog-fill{background:var(--apr-bd)}
-.pi-reg .prog-fill{background:var(--reg-bd)}
-.prog-pct{font-size:.75em;font-weight:700}
-.pi-apr .prog-pct{color:var(--apr-tx)}
-.pi-reg .prog-pct{color:var(--reg-tx)}
-
-/* Legend */
-.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:7px 20px;border-bottom:1px solid var(--border);background:var(--bg2);font-size:.67em;align-items:center}
-.leg-item{display:flex;align-items:center;gap:5px;color:var(--muted)}
-.leg-dot{width:9px;height:9px;border-radius:2px;border:1.5px solid;flex-shrink:0}
-.leg-hint{margin-left:auto;font-size:.67em;color:var(--muted);padding:6px 20px;background:var(--bg2);border-bottom:1px solid var(--border);text-align:right}
-
-/* ── MAIN GRID horizontal ── */
-main{padding:16px;overflow-x:auto;min-height:calc(100vh - 130px)}
-.grid-outer{display:flex;gap:0;min-width:max-content}
-.cuatri-col{display:flex;flex-direction:column;min-width:155px;max-width:155px;border-right:1px solid var(--border);padding-right:0}
-.cuatri-col:last-child{border-right:none}
-.col-header{
-  padding:8px 10px;border-bottom:1px solid var(--border);
-  background:rgba(88,166,255,.04);
-  margin-bottom:8px;
+.hdr-left h1{
+  font-size:1.25em;font-weight:900;color:#fff;
+  letter-spacing:.03em;
+  text-shadow:0 2px 10px rgba(0,0,0,.25);
 }
-.col-num{font-family:'Space Grotesk',sans-serif;font-size:1.1em;font-weight:700;color:var(--accent);line-height:1}
-.col-sub{font-size:.58em;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;line-height:1.4}
-.col-cards{display:flex;flex-direction:column;gap:6px;padding:0 8px 12px}
+.hdr-left p{font-size:.6em;color:rgba(255,255,255,.7);margin-top:2px;letter-spacing:.06em}
+.hdr-right{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 
-/* Year separator badge */
-.year-badge{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.58em;font-weight:700;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--accent);
-  padding:3px 10px 3px;border-bottom:2px solid var(--accent);
-  background:rgba(88,166,255,.06);
-  margin-bottom:0;
+/* Progress pills */
+.prog-pills{display:flex;gap:10px}
+.pill{
+  background:rgba(255,255,255,.18);
+  border:1.5px solid rgba(255,255,255,.3);
+  border-radius:30px;padding:6px 14px;
+  backdrop-filter:blur(6px);
+  min-width:132px;display:flex;flex-direction:column;gap:3px;
+}
+.pill-top{display:flex;justify-content:space-between;align-items:baseline}
+.pill-lbl{font-size:.56em;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.75)}
+.pill-val{font-size:.82em;font-weight:900;color:#fff}
+.pill-track{height:3px;background:rgba(255,255,255,.2);border-radius:3px;overflow:hidden}
+.pill-fill{height:100%;border-radius:3px;background:#fff;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.btn-reset{
+  font-family:'Nunito',inherit;font-size:.7em;font-weight:800;
+  text-transform:uppercase;letter-spacing:.08em;
+  background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.35);
+  color:#fff;border-radius:20px;padding:6px 16px;cursor:pointer;
+  transition:background .15s;
+}
+.btn-reset:hover{background:rgba(255,255,255,.32)}
+
+/* ══ LEGEND ══════════════════════════════════════════════════ */
+.legend{
+  display:flex;flex-wrap:wrap;gap:5px 20px;align-items:center;
+  padding:8px 26px;
+  background:linear-gradient(90deg,rgba(220,160,220,.15),rgba(170,140,220,.1));
+  border-bottom:1.5px solid rgba(180,120,200,.15);
+  font-size:.64em;font-weight:700;color:#8060a0;
+}
+.leg{display:flex;align-items:center;gap:6px}
+.leg-chip{
+  padding:2px 9px;border-radius:5px;font-size:.85em;font-weight:800;
+}
+.lc-apr{background:var(--apr-bg);color:var(--apr-tx)}
+.lc-reg{background:var(--reg-bg);color:var(--reg-tx)}
+.lc-can{background:var(--can-bg);color:var(--can-tx)}
+.lc-pend{background:var(--pend-bg);color:var(--pend-tx)}
+.leg-sep{color:rgba(180,140,210,.35);font-size:1.3em;margin:0 2px}
+.leg-note{font-weight:600;color:#a898c8;font-size:.92em}
+
+/* ══ MAIN SCROLL ════════════════════════════════════════════ */
+main{padding:20px 20px 60px;overflow-x:auto}
+.years-row{display:flex;gap:12px;min-width:max-content;align-items:flex-start}
+
+/* ── Year block ──────────────────────────────────────────── */
+.year-block{
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 4px 20px rgba(160,80,180,.12),0 1px 4px rgba(0,0,0,.06);
+  overflow:hidden;flex-shrink:0;
+}
+/* Year header – each gets a distinct pink→purple gradient */
+.year-block:nth-child(1) .year-hdr{background:linear-gradient(120deg,#e0246c,#9030c8)}
+.year-block:nth-child(2) .year-hdr{background:linear-gradient(120deg,#c82060,#7828b8)}
+.year-block:nth-child(3) .year-hdr{background:linear-gradient(120deg,#b81858,#6820a8)}
+.year-block:nth-child(4) .year-hdr{background:linear-gradient(120deg,#a81090,#5818a0)}
+.year-block:nth-child(5) .year-hdr{background:linear-gradient(120deg,#9810a8,#4818b0)}
+
+.year-hdr{
+  padding:10px 18px;text-align:center;
+  font-size:.78em;font-weight:900;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:#fff;
+  text-shadow:0 1px 6px rgba(0,0,0,.3);
 }
 
-/* ── CARD ── */
+/* ── Cuatrimestre columns ────────────────────────────────── */
+.year-quads{display:flex;gap:0}
+.quad{
+  padding:12px 11px 14px;
+  min-width:212px;
+  border-right:1.5px dashed rgba(180,130,210,.2);
+}
+.quad:last-child{border-right:none}
+.quad-title{
+  font-size:.6em;font-weight:800;
+  color:#b898d0;
+  text-align:center;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding-bottom:9px;margin-bottom:9px;
+  border-bottom:1.5px solid rgba(180,130,210,.15);
+}
+.cards{display:flex;flex-direction:column;gap:6px}
+
+/* ══ CARD ════════════════════════════════════════════════════ */
 .card{
-  border-radius:6px;border:1px solid var(--pend-bd);
-  background:var(--pend-bg);padding:8px 9px;
-  cursor:pointer;transition:transform .1s,box-shadow .1s;
-  position:relative;user-select:none;
-  display:flex;flex-direction:column;gap:4px;
+  display:flex;align-items:stretch;
+  border-radius:10px;
+  cursor:pointer;min-height:50px;
+  overflow:hidden;position:relative;
+  transition:transform .12s, box-shadow .12s, filter .1s;
+  box-shadow:0 2px 6px rgba(0,0,0,.07);
 }
-.card:hover:not(.st-blocked){transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.5)}
-.card.st-blocked{cursor:not-allowed;opacity:.38}
-.card.st-regular {background:var(--reg-bg);border-color:var(--reg-bd)}
-.card.st-approved{background:var(--apr-bg);border-color:var(--apr-bd)}
-.card.st-can     {background:var(--can-bg);border-color:var(--can-bd);box-shadow:0 0 0 1px rgba(31,111,235,.2)}
-.card.st-blocked {background:var(--lock-bg);border-color:var(--lock-bd)}
+.card:hover:not(.st-blocked){
+  transform:translateY(-2px) scale(1.015);
+  box-shadow:0 6px 18px rgba(0,0,0,.14);
+  filter:brightness(1.05);
+}
+.card.st-blocked{cursor:default;opacity:.72}
+.card.st-blocked,.card.st-pending{background:var(--pend-bg)}
+.card.st-can     {background:var(--can-bg)}
+.card.st-regular {background:var(--reg-bg)}
+.card.st-approved{background:var(--apr-bg)}
 
-.card-name{font-size:.68em;font-weight:600;line-height:1.3;color:#e6edf3}
-.card.st-blocked .card-name{color:var(--lock-tx)}
-.card-hours{font-size:.58em;color:var(--muted);margin-top:1px}
-.card-tag{font-size:.56em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:1px 5px;border-radius:20px;align-self:flex-start;line-height:1.6}
-.st-pending  .card-tag{display:none}
-.st-can      .card-tag{background:rgba(31,111,235,.15);color:var(--can-tx)}
-.st-regular  .card-tag{background:rgba(210,153,34,.15);color:var(--reg-tx)}
-.st-approved .card-tag{background:rgba(35,134,54,.15);color:var(--apr-tx)}
-.st-blocked  .card-tag{background:rgba(110,64,201,.12);color:var(--lock-tx)}
-.opt-dot{
-  position:absolute;top:4px;right:5px;
-  width:5px;height:5px;border-radius:50%;
-  background:rgba(110,64,201,.6);
+/* Left number area */
+.card-num{
+  width:36px;min-width:36px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.88em;font-weight:900;flex-shrink:0;
+  border-right:1px solid rgba(0,0,0,.07);
+}
+.card.st-blocked .card-num,.card.st-pending .card-num{background:rgba(0,0,0,.06);color:rgba(140,120,180,.5)}
+.card.st-can      .card-num{background:rgba(0,0,0,.07);color:rgba(60,50,130,.5)}
+.card.st-regular  .card-num{background:rgba(0,0,0,.1);color:rgba(255,255,255,.65)}
+.card.st-approved .card-num{background:rgba(0,0,0,.12);color:rgba(255,255,255,.65)}
+
+/* Center text */
+.card-body{
+  flex:1;padding:8px 8px 8px 8px;
+  display:flex;flex-direction:column;justify-content:center;gap:2px;
+}
+.card-name{font-size:.72em;font-weight:700;line-height:1.3}
+.card.st-blocked .card-name,.card.st-pending .card-name{color:var(--pend-tx)}
+.card.st-can      .card-name{color:var(--can-tx)}
+.card.st-regular  .card-name{color:var(--reg-tx)}
+.card.st-approved .card-name{color:var(--apr-tx)}
+.card-sub{font-size:.54em;font-weight:600;opacity:.6;margin-top:1px}
+
+/* Right icon area */
+.card-ic{
+  width:36px;min-width:36px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9em;flex-shrink:0;
+  border-left:1px solid rgba(0,0,0,.06);
+}
+.card.st-blocked .card-ic,.card.st-pending .card-ic{background:rgba(0,0,0,.04)}
+.card.st-can      .card-ic{background:rgba(0,0,0,.06)}
+.card.st-regular  .card-ic{background:rgba(0,0,0,.09)}
+.card.st-approved .card-ic{background:rgba(0,0,0,.1)}
+
+/* Optativa accent line */
+.opt-bar{
+  position:absolute;top:0;left:36px;right:36px;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(180,80,240,.5),transparent);
 }
 
-/* ── POPUP ── */
+/* ══ POPUP ════════════════════════════════════════════════════ */
 #popup{
-  position:fixed;z-index:1000;
-  background:var(--bg2);border:1px solid var(--border);
-  border-radius:8px;padding:8px;
-  box-shadow:0 8px 28px rgba(0,0,0,.65);
-  display:none;min-width:160px;
+  position:fixed;z-index:700;
+  background:#fff;
+  border:2px solid rgba(200,120,220,.25);
+  border-radius:16px;
+  padding:13px 11px 11px;
+  box-shadow:0 16px 48px rgba(160,60,180,.22),0 2px 8px rgba(0,0,0,.08);
+  display:none;min-width:234px;max-width:255px;
 }
-.pop-title{font-size:.65em;color:var(--muted);padding:2px 4px 6px;border-bottom:1px solid var(--border);margin-bottom:5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.pop-name{
+  font-size:.85em;font-weight:800;color:#3a2060;
+  padding:0 6px 9px;border-bottom:2px solid #f0e4f8;margin-bottom:8px;
+  line-height:1.3;
+}
+.pop-meta{font-size:.6em;font-weight:600;color:#b098c8;display:block;margin-top:2px}
+.pop-btns{display:flex;flex-direction:column;gap:4px}
 .pop-btn{
-  display:flex;align-items:center;gap:8px;
-  width:100%;padding:6px 8px;border-radius:5px;
-  cursor:pointer;transition:background .1s;
-  font-size:.75em;font-family:inherit;border:none;background:transparent;
-  color:var(--text);text-align:left;
+  display:flex;align-items:center;gap:10px;
+  padding:8px 9px;border-radius:9px;
+  cursor:pointer;border:1.5px solid transparent;
+  transition:all .12s;background:transparent;
+  font-family:'Nunito',inherit;font-size:.75em;font-weight:700;
+  color:#a090b8;text-align:left;width:100%;
 }
-.pop-btn:hover{background:var(--bg3)}
-.pop-btn.active{font-weight:700}
-.pop-btn .pdot{width:9px;height:9px;border-radius:2px;border:1.5px solid;flex-shrink:0}
-.pop-btn.b-pend .pdot{background:var(--pend-bg);border-color:rgba(110,118,129,.6)}
-.pop-btn.b-reg  .pdot{background:var(--reg-bg);border-color:var(--reg-bd)}
-.pop-btn.b-apr  .pdot{background:var(--apr-bg);border-color:var(--apr-bd)}
-.pop-btn.b-pend.active{color:#8b949e}
-.pop-btn.b-reg.active {color:var(--reg-tx)}
-.pop-btn.b-apr.active {color:var(--apr-tx)}
-.pop-req{font-size:.62em;color:#f85149;padding:5px 4px 2px;border-top:1px solid var(--border);margin-top:4px;line-height:1.5}
+.pop-btn:hover{background:#faf0fc;border-color:#e8c8f0}
+.pop-btn.active{background:#f5e8fc;border-color:#d8b0e8}
+.pop-ic{font-size:1.1em;width:22px;text-align:center;flex-shrink:0}
+.pop-btn.b-pend.active{color:#9088b0}
+.pop-btn.b-reg.active {color:var(--reg-bg)}
+.pop-btn.b-apr.active {color:var(--apr-bg)}
 
-/* ── TOAST ── */
-#toast-wrap{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:9999;pointer-events:none;display:flex;flex-direction:column;gap:7px;align-items:center}
-.toast{
-  background:var(--bg2);border:1px solid #b62324;border-radius:8px;
-  padding:10px 15px;font-size:.72em;max-width:380px;line-height:1.6;
-  box-shadow:0 6px 24px rgba(0,0,0,.65);animation:tIn .2s ease;pointer-events:auto;
+.pop-alert{
+  margin-top:8px;padding:8px 10px;border-radius:9px;
+  background:#fff0f5;border:1.5px solid rgba(220,60,100,.2);
+  font-size:.63em;font-weight:700;line-height:1.7;color:#c03060;
+  display:none;
 }
-.toast-title{font-weight:700;color:#f85149;margin-bottom:5px;display:flex;align-items:center;gap:6px;font-size:1.05em}
-.miss-r{color:var(--reg-tx)}.miss-a{color:#f0883e}
-@keyframes tIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@keyframes tOut{to{opacity:0;transform:translateY(8px)}}
+.pop-alert strong{display:block;margin-bottom:3px;color:#e03060;font-size:1.05em}
+.wr{color:#c08030}.wa{color:#c04040}
 
-/* Reset btn */
-.btn-reset{background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:5px;padding:5px 12px;font-size:.7em;cursor:pointer;font-family:inherit;transition:background .15s}
-.btn-reset:hover{background:#2d333b}
+/* ══ ANIMATIONS ═════════════════════════════════════════════ */
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+@keyframes popIn{from{opacity:0;transform:scale(.95) translateY(4px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.year-block{animation:popIn .28s cubic-bezier(.2,0,.2,1.4) both}
+.year-block:nth-child(1){animation-delay:.04s}
+.year-block:nth-child(2){animation-delay:.09s}
+.year-block:nth-child(3){animation-delay:.14s}
+.year-block:nth-child(4){animation-delay:.19s}
+.year-block:nth-child(5){animation-delay:.24s}
 </style>
 </head>
 <body>
+
 <header>
-  <div class="hdr-title">
-    <h1>Ingeniería Electrónica · Plan 2012 · FACENA–UNNE</h1>
-    <p>Malla Curricular Interactiva con Correlatividades &mdash; Res. Nº 3391/12</p>
+  <div class="hdr-left">
+    <h1>🎓 Ingeniería Electrónica · Plan 2012</h1>
+    <p>FACENA – UNNE &nbsp;·&nbsp; Res. Nº 3391/12 &nbsp;·&nbsp; Malla Curricular Interactiva</p>
   </div>
   <div class="hdr-right">
-    <div class="prog-group">
-      <div class="prog-item pi-apr">
-        <div class="prog-label"><span>Aprobadas</span><span id="pct-apr-txt">0%</span></div>
-        <div class="prog-bar"><div class="prog-fill" id="bar-apr" style="width:0%"></div></div>
-        <div class="prog-pct" id="pct-apr">0 / 4136 hs</div>
+    <div class="prog-pills">
+      <div class="pill">
+        <div class="pill-top">
+          <span class="pill-lbl">✅ Aprobadas</span>
+          <span class="pill-val" id="val-apr">0%</span>
+        </div>
+        <div class="pill-track"><div class="pill-fill" id="fill-apr" style="width:0%"></div></div>
       </div>
-      <div class="prog-item pi-reg">
-        <div class="prog-label"><span>Regulares</span><span id="pct-reg-txt">0%</span></div>
-        <div class="prog-bar"><div class="prog-fill" id="bar-reg" style="width:0%"></div></div>
-        <div class="prog-pct" id="pct-reg">0 / 4136 hs</div>
+      <div class="pill">
+        <div class="pill-top">
+          <span class="pill-lbl">📖 Regulares</span>
+          <span class="pill-val" id="val-reg">0%</span>
+        </div>
+        <div class="pill-track"><div class="pill-fill" id="fill-reg" style="width:0%"></div></div>
       </div>
     </div>
     <button class="btn-reset" onclick="resetAll()">↺ Reiniciar</button>
   </div>
 </header>
+
 <div class="legend">
-  <div class="leg-item"><div class="leg-dot" style="background:var(--pend-bg);border-color:var(--pend-bd)"></div>Pendiente</div>
-  <div class="leg-item"><div class="leg-dot" style="background:var(--can-bg);border-color:var(--can-bd)"></div>Puedo cursar</div>
-  <div class="leg-item"><div class="leg-dot" style="background:var(--reg-bg);border-color:var(--reg-bd)"></div>Regular</div>
-  <div class="leg-item"><div class="leg-dot" style="background:var(--apr-bg);border-color:var(--apr-bd)"></div>Aprobada</div>
-  <div class="leg-item"><div class="leg-dot" style="background:var(--lock-bg);border-color:var(--lock-bd)"></div>Bloqueada</div>
-  <div class="leg-item"><div class="opt-dot" style="position:static;width:7px;height:7px;margin-right:-2px"></div>Optativa</div>
-  <div class="leg-hint">Hacé click en una materia para cambiar su estado</div>
+  <div class="leg"><span class="leg-chip lc-apr">✅ Aprobada</span></div>
+  <div class="leg"><span class="leg-chip lc-reg">📖 Regular</span></div>
+  <div class="leg"><span class="leg-chip lc-can">🔓 Puedo cursar</span></div>
+  <div class="leg"><span class="leg-chip lc-pend">🔒 Pendiente</span></div>
+  <span class="leg-sep">|</span>
+  <span style="color:#b088cc;font-size:.85em">▬ Optativa</span>
+  <span class="leg-sep">|</span>
+  <span class="leg-note">Click en una materia para cambiar su estado · 4136 hs totales</span>
 </div>
-<main><div class="grid-outer" id="grid"></div></main>
+
+<main>
+  <div class="years-row" id="grid"></div>
+</main>
 
 <div id="popup">
-  <div class="pop-title" id="pop-title">Materia</div>
-  <button class="pop-btn b-pend" onclick="setFromPop(0)"><div class="pdot"></div>Sin Cursar</button>
-  <button class="pop-btn b-reg"  onclick="setFromPop(1)"><div class="pdot"></div>Regular</button>
-  <button class="pop-btn b-apr"  onclick="setFromPop(2)"><div class="pdot"></div>Aprobada</button>
-  <div class="pop-req" id="pop-req" style="display:none"></div>
+  <div class="pop-name" id="pop-name">—<span class="pop-meta" id="pop-meta"></span></div>
+  <div class="pop-btns">
+    <button class="pop-btn b-pend" onclick="setFromPop(0)">
+      <span class="pop-ic">🔒</span><span>Sin cursar / Pendiente</span>
+    </button>
+    <button class="pop-btn b-reg" onclick="setFromPop(1)">
+      <span class="pop-ic">📖</span><span>Regular</span>
+    </button>
+    <button class="pop-btn b-apr" onclick="setFromPop(2)">
+      <span class="pop-ic">✅</span><span>Aprobada</span>
+    </button>
+  </div>
+  <div class="pop-alert" id="pop-alert"></div>
 </div>
-<div id="toast-wrap"></div>
 
 <script>
-// ── DATA ──────────────────────────────────────────────────────
 const S = {
-  // C1 – Año 1, 1er Cuat
-  aga:    {name:'Álgebra y Geometría Analítica', h:160, r_c:[], a_c:[], a_r:[]},
-  cdi1:   {name:'Cálculo Dif. e Integral I',     h:112, r_c:[], a_c:[], a_r:[]},
-  quim:   {name:'Química General',               h:112, r_c:[], a_c:[], a_r:[]},
-  sem1:   {name:'Seminario Ing. Módulo I',        h:32,  r_c:[], a_c:[], a_r:[]},
-  // C2 – Año 1, 2do Cuat
-  sisrep: {name:'Sistemas de Representación', h:96,  r_c:[], a_c:[], a_r:[]},
-  info:   {name:'Informática',               h:80,  r_c:[], a_c:[], a_r:[]},
-  cdi2:   {name:'Cálculo Dif. e Integral II', h:128, r_c:['cdi1'], a_c:[], a_r:['cdi1']},
-  mos:    {name:'Mecánica, Óptica y Sonido',  h:160, r_c:['cdi1','aga'], a_c:[], a_r:['cdi1','aga']},
-  // C3 – Año 2, 1er Cuat
-  emc:    {name:'Electricidad, Magnetismo y Calor', h:160, r_c:['mos'], a_c:['cdi1'], a_r:['mos','cdi1']},
-  ead:    {name:'Estadística y Análisis de Datos',  h:80,  r_c:['cdi2','aga'], a_c:['cdi1'], a_r:['cdi2','aga','cdi1']},
-  fisato: {name:'Física Atómica',                   h:64,  r_c:['mos'], a_c:[], a_r:['mos']},
-  sem2:   {name:'Seminario Ing. Módulo II',          h:32,  r_c:[], a_c:['sem1'], a_r:['sem1']},
-  // C4 – Año 2, 2do Cuat
-  elect1: {name:'Electrotecnia I',          h:128, r_c:['emc'], a_c:['mos','cdi2'], a_r:['emc','mos','cdi2']},
-  matcomp:{name:'Materiales y Componentes', h:112, r_c:['emc'], a_c:['quim'], a_r:['emc','quim']},
-  fes:    {name:'Física del Estado Sólido', h:96,  r_c:['emc'], a_c:[], a_r:['emc']},
-  metnum: {name:'Métodos Numéricos',        h:64,  r_c:['info'], a_c:['aga','cdi1'], a_r:['info','aga','cdi1']},
-  // C5 – Año 3, 1er Cuat
-  am:       {name:'Análisis Matemático',  h:96,  r_c:[], a_c:['cdi2'], a_r:['cdi2']},
-  elect2:   {name:'Electrotecnia II',     h:128, r_c:['elect1'], a_c:[], a_r:['elect1']},
-  medeelec: {name:'Medidas Eléctricas',   h:128, r_c:['elect1','ead'], a_c:[], a_r:['elect1','ead']},
-  // C6 – Año 3, 2do Cuat
-  teorcir:   {name:'Teoría de Circuitos', h:112, r_c:['am'], a_c:['elect1'], a_r:['am','elect1']},
-  eleci:     {name:'Electrónica I',       h:128, r_c:['matcomp'], a_c:['elect1','fes'], a_r:['matcomp','elect1','fes']},
-  electromag:{name:'Electromagnetismo',   h:112, r_c:['am','fisato'], a_c:[], a_r:['am','fisato']},
-  sem3:      {name:'Seminario Ing. Módulo III', h:32, r_c:[], a_c:['sem2'], a_r:['sem2']},
-  // C7 – Año 4, 1er Cuat
-  tctrl:  {name:'Teoría de Control',       h:96,  r_c:['teorcir'], a_c:['am'], a_r:['teorcir','am']},
-  elecii: {name:'Electrónica II',          h:128, r_c:['eleci'], a_c:[], a_r:['eleci']},
-  circlog:{name:'Circuitos Lógicos',       h:80,  r_c:[], a_c:['eleci'], a_r:['eleci']},
-  syss:   {name:'Señales y Sistemas',      h:80,  r_c:['teorcir'], a_c:[], a_r:['teorcir']},
-  sem4:   {name:'Seminario Ing. Módulo IV',h:32,  r_c:[], a_c:['sem3'], a_r:['sem3']},
-  // C8 – Año 4, 2do Cuat
-  elecing:  {name:'Electrónica Industrial',      h:128, r_c:[], a_c:['elect2','eleci'], a_r:['elect2','eleci']},
-  eleciii:  {name:'Electrónica III',             h:112, r_c:['circlog'], a_c:['eleci'], a_r:['circlog','eleci']},
-  medelectr:{name:'Mediciones Electrónicas',     h:128, r_c:['elecii'], a_c:['medeelec'], a_r:['elecii','medeelec']},
-  opt1fc:   {name:'Fund. de Comunicaciones', h:96,  opt:true, r_c:['elecii'], a_c:['eleci','electromag'], a_r:['elecii','eleci','electromag']},
-  opt1bi:   {name:'Bioinstrumentación',      h:96,  opt:true, r_c:['elecii'], a_c:['eleci','electromag'], a_r:['elecii','eleci','electromag']},
-  // C9 – Año 5, 1er Cuat
-  inglegal: {name:'Ingeniería Legal',             h:80,  r_c:[], a_c:['sem4'], a_r:['sem4']},
-  sem5:     {name:'Seminario Ing. Módulo V',      h:32,  r_c:[], a_c:['sem4'], a_r:['sem4']},
-  opt2pa:   {name:'Propagación y Antenas',        h:96,  opt:true, r_c:['opt1fc'], a_c:['syss'], a_r:['opt1fc','syss']},
-  opt2pdb:  {name:'Proc. Digital de Bioseñales',  h:96,  opt:true, r_c:['opt1bi'], a_c:['syss'], a_r:['opt1bi','syss']},
-  opt3ti:   {name:'Transmisión de la Información',h:112, opt:true, r_c:['opt1fc'], a_c:['syss'], a_r:['opt1fc','syss']},
-  opt3msf:  {name:'Mod. y Sim. Sist. Fisiol.',    h:112, opt:true, r_c:['opt1bi'], a_c:['syss'], a_r:['opt1bi','syss']},
-  // Anual
-  pf:  {name:'Proyecto Final (Anual)', h:176, r_c:['elecing','eleciii','medelectr'], a_c:['tctrl'], a_r:['elecing','eleciii','medelectr','tctrl']},
-  pps: {name:'Práctica Prof. Supervisada', h:200, r_c:[], a_c:[], a_r:[]},
-  // C10 – Año 5, 2do Cuat
-  ecoorg: {name:'Economía y Org. Industrial', h:96,  r_c:[], a_c:['sem3'], a_r:['sem3']},
-  opt4sc: {name:'Sistemas de Comunicación',   h:112, opt:true, r_c:['opt2pa','opt3ti'], a_c:[], a_r:['opt2pa','opt3ti']},
-  opt4ic: {name:'Ingeniería Clínica',          h:112, opt:true, r_c:['opt2pdb','opt3msf'], a_c:[], a_r:['opt2pdb','opt3msf']},
+  aga:     {n:'Álgebra y Geometría Analítica',h:160,r_c:[],a_c:[],a_r:[]},
+  cdi1:    {n:'Cálculo Dif. e Integral I',h:112,r_c:[],a_c:[],a_r:[]},
+  quim:    {n:'Química General',h:112,r_c:[],a_c:[],a_r:[]},
+  sem1:    {n:'Seminario de Ingeniería I',h:32,r_c:[],a_c:[],a_r:[]},
+  sisrep:  {n:'Sistemas de Representación',h:96,r_c:[],a_c:[],a_r:[]},
+  info:    {n:'Informática',h:80,r_c:[],a_c:[],a_r:[]},
+  cdi2:    {n:'Cálculo Dif. e Integral II',h:128,r_c:['cdi1'],a_c:[],a_r:['cdi1']},
+  mos:     {n:'Mecánica, Óptica y Sonido',h:160,r_c:['cdi1','aga'],a_c:[],a_r:['cdi1','aga']},
+  emc:     {n:'Electricidad, Magnetismo y Calor',h:160,r_c:['mos'],a_c:['cdi1'],a_r:['mos','cdi1']},
+  ead:     {n:'Estadística y Análisis de Datos',h:80,r_c:['cdi2','aga'],a_c:['cdi1'],a_r:['cdi2','aga','cdi1']},
+  fisato:  {n:'Física Atómica',h:64,r_c:['mos'],a_c:[],a_r:['mos']},
+  sem2:    {n:'Seminario de Ingeniería II',h:32,r_c:[],a_c:['sem1'],a_r:['sem1']},
+  elect1:  {n:'Electrotecnia I',h:128,r_c:['emc'],a_c:['mos','cdi2'],a_r:['emc','mos','cdi2']},
+  matcomp: {n:'Materiales y Componentes',h:112,r_c:['emc'],a_c:['quim'],a_r:['emc','quim']},
+  fes:     {n:'Física del Estado Sólido',h:96,r_c:['emc'],a_c:[],a_r:['emc']},
+  metnum:  {n:'Métodos Numéricos',h:64,r_c:['info'],a_c:['aga','cdi1'],a_r:['info','aga','cdi1']},
+  am:      {n:'Análisis Matemático',h:96,r_c:[],a_c:['cdi2'],a_r:['cdi2']},
+  elect2:  {n:'Electrotecnia II',h:128,r_c:['elect1'],a_c:[],a_r:['elect1']},
+  medeelec:{n:'Medidas Eléctricas',h:128,r_c:['elect1','ead'],a_c:[],a_r:['elect1','ead']},
+  teorcir: {n:'Teoría de Circuitos',h:112,r_c:['am'],a_c:['elect1'],a_r:['am','elect1']},
+  eleci:   {n:'Electrónica I',h:128,r_c:['matcomp'],a_c:['elect1','fes'],a_r:['matcomp','elect1','fes']},
+  electromag:{n:'Electromagnetismo',h:112,r_c:['am','fisato'],a_c:[],a_r:['am','fisato']},
+  sem3:    {n:'Seminario de Ingeniería III',h:32,r_c:[],a_c:['sem2'],a_r:['sem2']},
+  tctrl:   {n:'Teoría de Control',h:96,r_c:['teorcir'],a_c:['am'],a_r:['teorcir','am']},
+  elecii:  {n:'Electrónica II',h:128,r_c:['eleci'],a_c:[],a_r:['eleci']},
+  circlog: {n:'Circuitos Lógicos',h:80,r_c:[],a_c:['eleci'],a_r:['eleci']},
+  syss:    {n:'Señales y Sistemas',h:80,r_c:['teorcir'],a_c:[],a_r:['teorcir']},
+  sem4:    {n:'Seminario de Ingeniería IV',h:32,r_c:[],a_c:['sem3'],a_r:['sem3']},
+  elecing: {n:'Electrónica Industrial',h:128,r_c:[],a_c:['elect2','eleci'],a_r:['elect2','eleci']},
+  eleciii: {n:'Electrónica III',h:112,r_c:['circlog'],a_c:['eleci'],a_r:['circlog','eleci']},
+  medelectr:{n:'Mediciones Electrónicas',h:128,r_c:['elecii'],a_c:['medeelec'],a_r:['elecii','medeelec']},
+  opt1fc:  {n:'Fund. de Comunicaciones',h:96,opt:1,r_c:['elecii'],a_c:['eleci','electromag'],a_r:['elecii','eleci','electromag']},
+  opt1bi:  {n:'Bioinstrumentación',h:96,opt:1,r_c:['elecii'],a_c:['eleci','electromag'],a_r:['elecii','eleci','electromag']},
+  inglegal:{n:'Ingeniería Legal',h:80,r_c:[],a_c:['sem4'],a_r:['sem4']},
+  sem5:    {n:'Seminario de Ingeniería V',h:32,r_c:[],a_c:['sem4'],a_r:['sem4']},
+  opt2pa:  {n:'Propagación y Antenas',h:96,opt:1,r_c:['opt1fc'],a_c:['syss'],a_r:['opt1fc','syss']},
+  opt2pdb: {n:'Proc. Digital de Bioseñales',h:96,opt:1,r_c:['opt1bi'],a_c:['syss'],a_r:['opt1bi','syss']},
+  opt3ti:  {n:'Transmisión de la Información',h:112,opt:1,r_c:['opt1fc'],a_c:['syss'],a_r:['opt1fc','syss']},
+  opt3msf: {n:'Mod. y Sim. Sist. Fisiológicos',h:112,opt:1,r_c:['opt1bi'],a_c:['syss'],a_r:['opt1bi','syss']},
+  pf:      {n:'Proyecto Final',h:176,r_c:['elecing','eleciii','medelectr'],a_c:['tctrl'],a_r:['elecing','eleciii','medelectr','tctrl']},
+  pps:     {n:'Práctica Prof. Supervisada',h:200,r_c:[],a_c:[],a_r:[]},
+  ecoorg:  {n:'Economía y Org. Industrial',h:96,r_c:[],a_c:['sem3'],a_r:['sem3']},
+  opt4sc:  {n:'Sistemas de Comunicación',h:112,opt:1,r_c:['opt2pa','opt3ti'],a_c:[],a_r:['opt2pa','opt3ti']},
+  opt4ic:  {n:'Ingeniería Clínica',h:112,opt:1,r_c:['opt2pdb','opt3msf'],a_c:[],a_r:['opt2pdb','opt3msf']},
 };
 
-const TOTAL_H = Object.values(S).reduce((s,v)=>s+v.h, 0);
+const TOTAL_H = Object.values(S).reduce((s,v)=>s+v.h,0);
+const ORDER=['aga','cdi1','quim','sem1','sisrep','info','cdi2','mos','emc','ead','fisato','sem2','elect1','matcomp','fes','metnum','am','elect2','medeelec','teorcir','eleci','electromag','sem3','tctrl','elecii','circlog','syss','sem4','elecing','eleciii','medelectr','opt1fc','opt1bi','inglegal','sem5','opt2pa','opt2pdb','opt3ti','opt3msf','pf','pps','ecoorg','opt4sc','opt4ic'];
+const NUM={}; ORDER.forEach((id,i)=>NUM[id]=i+1);
 
-const COLS = [
-  {num:'1°', sub:'Cuatrimestre\nAño 1 · 1er Sem.', year:'PRIMER AÑO', ids:['aga','cdi1','quim','sem1']},
-  {num:'2°', sub:'Cuatrimestre\nAño 1 · 2do Sem.', year:null,         ids:['sisrep','info','cdi2','mos']},
-  {num:'3°', sub:'Cuatrimestre\nAño 2 · 1er Sem.', year:'SEGUNDO AÑO',ids:['emc','ead','fisato','sem2']},
-  {num:'4°', sub:'Cuatrimestre\nAño 2 · 2do Sem.', year:null,         ids:['elect1','matcomp','fes','metnum']},
-  {num:'5°', sub:'Cuatrimestre\nAño 3 · 1er Sem.', year:'TERCER AÑO', ids:['am','elect2','medeelec']},
-  {num:'6°', sub:'Cuatrimestre\nAño 3 · 2do Sem.', year:null,         ids:['teorcir','eleci','electromag','sem3']},
-  {num:'7°', sub:'Cuatrimestre\nAño 4 · 1er Sem.', year:'CUARTO AÑO', ids:['tctrl','elecii','circlog','syss','sem4']},
-  {num:'8°', sub:'Cuatrimestre\nAño 4 · 2do Sem.', year:null,         ids:['elecing','eleciii','medelectr','opt1fc','opt1bi']},
-  {num:'9°', sub:'Cuatrimestre\nAño 5 · 1er Sem.', year:'QUINTO AÑO', ids:['inglegal','sem5','opt2pa','opt2pdb','opt3ti','opt3msf']},
-  {num:'—',  sub:'Anual\nAño 5',                   year:null,         ids:['pf','pps']},
-  {num:'10°',sub:'Cuatrimestre\nAño 5 · 2do Sem.', year:null,         ids:['ecoorg','opt4sc','opt4ic']},
+const YEARS=[
+  {title:'Año 1',quads:[
+    {title:'1° Cuatrimestre',ids:['aga','cdi1','quim','sem1']},
+    {title:'2° Cuatrimestre',ids:['sisrep','info','cdi2','mos']},
+  ]},
+  {title:'Año 2',quads:[
+    {title:'1° Cuatrimestre',ids:['emc','ead','fisato','sem2']},
+    {title:'2° Cuatrimestre',ids:['elect1','matcomp','fes','metnum']},
+  ]},
+  {title:'Año 3',quads:[
+    {title:'1° Cuatrimestre',ids:['am','elect2','medeelec']},
+    {title:'2° Cuatrimestre',ids:['teorcir','eleci','electromag','sem3']},
+  ]},
+  {title:'Año 4',quads:[
+    {title:'1° Cuatrimestre',ids:['tctrl','elecii','circlog','syss','sem4']},
+    {title:'2° Cuatrimestre',ids:['elecing','eleciii','medelectr','opt1fc','opt1bi']},
+  ]},
+  {title:'Año 5',quads:[
+    {title:'1° Cuatrimestre',ids:['inglegal','sem5','opt2pa','opt2pdb','opt3ti','opt3msf']},
+    {title:'Anual',ids:['pf','pps']},
+    {title:'2° Cuatrimestre',ids:['ecoorg','opt4sc','opt4ic']},
+  ]},
 ];
 
-// ── STATE ──────────────────────────────────────────────────────
-const state = {};
-Object.keys(S).forEach(id => state[id] = 0);
-try { const sv = localStorage.getItem('elec2012v2'); if(sv) Object.assign(state, JSON.parse(sv)); } catch(e){}
-function save(){ try{ localStorage.setItem('elec2012v2', JSON.stringify(state)); } catch(e){} }
+// State
+const state={};
+Object.keys(S).forEach(id=>state[id]=0);
+try{const sv=localStorage.getItem('elec12v5');if(sv)Object.assign(state,JSON.parse(sv));}catch(e){}
+const save=()=>{try{localStorage.setItem('elec12v5',JSON.stringify(state));}catch(e){}};
 
-// ── STATUS ────────────────────────────────────────────────────
 function getStatus(id){
-  const v = state[id];
-  if(v===1) return 'regular';
-  if(v===2) return 'approved';
-  const sub = S[id];
-  const rc = sub.r_c.every(d=>state[d]>=1);
-  const ac = sub.a_c.every(d=>state[d]>=2);
-  if(rc && ac) return 'can';
-  return (sub.r_c.length===0 && sub.a_c.length===0) ? 'can' : 'blocked';
+  const v=state[id];
+  if(v===1)return'regular';
+  if(v===2)return'approved';
+  const s=S[id];
+  return(s.r_c.every(d=>state[d]>=1)&&s.a_c.every(d=>state[d]>=2))||(s.r_c.length===0&&s.a_c.length===0)?'can':'blocked';
 }
-
 function getMissing(id){
-  const sub = S[id], miss=[];
-  sub.r_c.forEach(d=>{ if(state[d]<1) miss.push({name:S[d].name, need:'Regular', have:state[d]===2?'Aprobada':'Pendiente', t:'r'}); });
-  sub.a_c.forEach(d=>{ if(state[d]<2) miss.push({name:S[d].name, need:'Aprobada', have:state[d]===1?'Regular (falta aprobar)':'Pendiente', t:'a'}); });
-  return miss;
+  const s=S[id],m=[];
+  s.r_c.forEach(d=>{if(state[d]<1)m.push({n:S[d].n,need:'Regular',t:'r'});});
+  s.a_c.forEach(d=>{if(state[d]<2)m.push({n:S[d].n,need:'Aprobada',t:'a'});});
+  return m;
 }
 
-// ── RENDER ───────────────────────────────────────────────────
+const ICON={can:'🔓',regular:'📖',approved:'✅',blocked:'🔒'};
+const CLS={can:'st-can',regular:'st-regular',approved:'st-approved',blocked:'st-blocked'};
+
 function render(){
-  const grid = document.getElementById('grid');
+  const grid=document.getElementById('grid');
   grid.innerHTML='';
-  COLS.forEach(col => {
-    const colDiv = document.createElement('div');
-    colDiv.className='cuatri-col';
-    if(col.year){
-      const yb = document.createElement('div');
-      yb.className='year-badge';
-      yb.textContent=col.year;
-      colDiv.appendChild(yb);
-    }
-    const hdr = document.createElement('div');
-    hdr.className='col-header';
-    const lines = col.sub.split('\n');
-    hdr.innerHTML=`<div class="col-num">${col.num}</div><div class="col-sub">${lines.join('<br>')}</div>`;
-    colDiv.appendChild(hdr);
-    const cards = document.createElement('div');
-    cards.className='col-cards';
-    col.ids.forEach(id=>{
-      const sub=S[id], st=getStatus(id);
-      const stClass={regular:'st-regular',approved:'st-approved',can:'st-can',blocked:'st-blocked'}[st]||'st-pending';
-      const tagLabel={regular:'Regular',approved:'Aprobada',can:'Puedo Cursar',blocked:'Bloqueada'}[st]||'';
-      const c=document.createElement('div');
-      c.className=`card ${stClass}`;
-      c.dataset.id=id;
-      c.innerHTML=`${sub.opt?'<div class="opt-dot"></div>':''}<div class="card-name">${sub.name}</div><div class="card-hours">${sub.h} hs</div><div class="card-tag">${tagLabel}</div>`;
-      c.addEventListener('click', e=>{ e.stopPropagation(); openPopup(id, c); });
-      cards.appendChild(c);
+  YEARS.forEach(year=>{
+    const yb=document.createElement('div');
+    yb.className='year-block';
+    const yh=document.createElement('div');
+    yh.className='year-hdr';yh.textContent=year.title;
+    yb.appendChild(yh);
+    const yq=document.createElement('div');
+    yq.className='year-quads';
+    year.quads.forEach(quad=>{
+      const qc=document.createElement('div');
+      qc.className='quad';
+      const qt=document.createElement('div');
+      qt.className='quad-title';qt.textContent=quad.title;
+      qc.appendChild(qt);
+      const cl=document.createElement('div');
+      cl.className='cards';
+      quad.ids.forEach(id=>{
+        const s=S[id],st=getStatus(id),cls=CLS[st]||'';
+        const card=document.createElement('div');
+        card.className='card '+cls;
+        card.dataset.id=id;
+        card.innerHTML=`
+          ${s.opt?'<div class="opt-bar"></div>':''}
+          <div class="card-num">${NUM[id]}</div>
+          <div class="card-body">
+            <div class="card-name">${s.n}</div>
+            <span class="card-sub">${s.h} hs${s.opt?' · Optativa':''}</span>
+          </div>
+          <div class="card-ic">${ICON[st]}</div>
+        `;
+        card.addEventListener('click',e=>{e.stopPropagation();openPopup(id,card);});
+        cl.appendChild(card);
+      });
+      qc.appendChild(cl);yq.appendChild(qc);
     });
-    colDiv.appendChild(cards);
-    grid.appendChild(colDiv);
+    yb.appendChild(yq);grid.appendChild(yb);
   });
   updateProgress();
 }
 
 function updateProgress(){
-  const apr = Object.keys(S).filter(id=>state[id]===2).reduce((s,id)=>s+S[id].h,0);
-  const reg = Object.keys(S).filter(id=>state[id]===1).reduce((s,id)=>s+S[id].h,0);
-  const pctA = Math.round(apr/TOTAL_H*100);
-  const pctR = Math.round(reg/TOTAL_H*100);
-  document.getElementById('bar-apr').style.width=pctA+'%';
-  document.getElementById('bar-reg').style.width=pctR+'%';
-  document.getElementById('pct-apr').textContent=apr+' / '+TOTAL_H+' hs';
-  document.getElementById('pct-reg').textContent=reg+' / '+TOTAL_H+' hs';
-  document.getElementById('pct-apr-txt').textContent=pctA+'%';
-  document.getElementById('pct-reg-txt').textContent=pctR+'%';
+  const aprH=Object.keys(S).filter(id=>state[id]===2).reduce((s,id)=>s+S[id].h,0);
+  const regH=Object.keys(S).filter(id=>state[id]===1).reduce((s,id)=>s+S[id].h,0);
+  const pA=Math.round(aprH/TOTAL_H*100),pR=Math.round(regH/TOTAL_H*100);
+  document.getElementById('fill-apr').style.width=pA+'%';
+  document.getElementById('fill-reg').style.width=pR+'%';
+  document.getElementById('val-apr').textContent=pA+'% · '+aprH+' hs';
+  document.getElementById('val-reg').textContent=pR+'% · '+regH+' hs';
 }
 
-// ── POPUP ────────────────────────────────────────────────────
-let popId = null;
-const popup = document.getElementById('popup');
+let popId=null;
+const popup=document.getElementById('popup');
 
-function openPopup(id, cardEl){
-  popId = id;
-  const sub = S[id];
-  const cur = state[id];
-  document.getElementById('pop-title').textContent=sub.name;
-  popup.querySelectorAll('.pop-btn').forEach((b,i)=>{
-    b.classList.toggle('active', i===cur);
-  });
-
-  // Show missing requirements in popup
-  const miss = getMissing(id);
-  const reqDiv = document.getElementById('pop-req');
-  if(miss.length > 0){
-    const lines = miss.map(m=>`<span class="miss-${m.t}">• ${m.name}: necesitás <b>${m.need}</b></span>`).join('<br>');
-    reqDiv.innerHTML='<b>Requisitos faltantes:</b><br>'+lines;
-    reqDiv.style.display='block';
-  } else {
-    reqDiv.style.display='none';
-  }
-
+function openPopup(id,cardEl){
+  popId=id;
+  const s=S[id];
+  document.getElementById('pop-name').childNodes[0].textContent=s.n;
+  document.getElementById('pop-meta').textContent=s.h+' horas'+(s.opt?' · Optativa':'');
+  popup.querySelectorAll('.pop-btn').forEach((b,i)=>b.classList.toggle('active',i===state[id]));
+  const miss=getMissing(id);
+  const ad=document.getElementById('pop-alert');
+  if(miss.length){
+    ad.innerHTML='<strong>Requisitos faltantes:</strong>'+miss.map(m=>`<span class="w${m.t}">· ${m.n} → ${m.need}</span>`).join('<br>');
+    ad.style.display='block';
+  }else{ad.style.display='none';}
   popup.style.display='block';
   const r=cardEl.getBoundingClientRect();
-  let left=r.right+6, top=r.top;
-  if(left+175>window.innerWidth) left=r.left-180;
-  if(top+popup.offsetHeight>window.innerHeight) top=window.innerHeight-popup.offsetHeight-8;
-  popup.style.left=left+'px';
-  popup.style.top=Math.max(8,top)+'px';
+  let left=r.right+10,top=r.top;
+  if(left+260>window.innerWidth)left=r.left-258;
+  if(top+popup.offsetHeight>window.innerHeight)top=window.innerHeight-popup.offsetHeight-10;
+  popup.style.left=left+'px';popup.style.top=Math.max(10,top)+'px';
 }
-
-function closePopup(){ popup.style.display='none'; popId=null; }
-document.addEventListener('click', e=>{ if(!popup.contains(e.target)) closePopup(); });
+function closePopup(){popup.style.display='none';popId=null;}
+document.addEventListener('click',e=>{if(!popup.contains(e.target))closePopup();});
 
 function setFromPop(target){
-  if(!popId) return;
+  if(!popId)return;
   const id=popId;
-  if(target===state[id]){ closePopup(); return; }
-
-  // Always allow setting to 0 (sin cursar)
-  if(target===0){ state[id]=0; save(); render(); closePopup(); return; }
-
-  // Check requirements
-  const miss = getMissing(id);
-  if(miss.length>0 && target>=1){
-    // Still show which are missing
-    const reqDiv = document.getElementById('pop-req');
-    const lines = miss.map(m=>`<span class="miss-${m.t}">• ${m.name}: necesitás <b>${m.need}</b></span>`).join('<br>');
-    reqDiv.innerHTML='<b>⚠ No podés marcarla aún:</b><br>'+lines;
-    reqDiv.style.display='block';
-    shakePopup();
+  if(target===0){state[id]=0;save();render();closePopup();return;}
+  const miss=getMissing(id);
+  if(miss.length&&target>=1){
+    const ad=document.getElementById('pop-alert');
+    ad.innerHTML='<strong>⚠ No podés marcarla aún:</strong>'+miss.map(m=>`<span class="w${m.t}">· ${m.n} → ${m.need}</span>`).join('<br>');
+    ad.style.display='block';
+    popup.style.animation='none';popup.offsetHeight;popup.style.animation='shake .3s ease';
     return;
   }
-
-  state[id]=target; save(); render();
-  // Re-open popup to reflect new state
+  state[id]=target;save();render();
   const card=document.querySelector(`[data-id="${id}"]`);
-  if(card) openPopup(id,card);
+  if(card)openPopup(id,card);
 }
-
-function shakePopup(){
-  popup.style.animation='none';
-  popup.offsetHeight;
-  popup.style.animation='shake .3s ease';
-}
-
 function resetAll(){
-  if(!confirm('¿Reiniciar todo el progreso?')) return;
+  if(!confirm('¿Reiniciar todo el progreso?'))return;
   Object.keys(state).forEach(id=>state[id]=0);
-  save(); render(); closePopup();
+  save();render();closePopup();
 }
-
-// Add shake keyframes
-const style=document.createElement('style');
-style.textContent='@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}';
-document.head.appendChild(style);
-
 render();
 </script>
 </body>
+</html>
