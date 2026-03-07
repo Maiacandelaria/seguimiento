@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="girly">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ingeniería Electrónica · Plan 2012</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ═══════════════════════════════════════════════════════════
+   THEMES via [data-theme] on <html>
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── GIRLY — Coquette / Bow aesthetic ──────────────────── */
+[data-theme="girly"]{
+  --body-bg:       #fff0f3;
+  --body-noise1:   rgba(255,180,200,.12);
+  --body-noise2:   rgba(255,210,220,.08);
+  --surface:       #ffffff;
+  --surface2:      #fff5f7;
+  --quad-border:   rgba(255,150,175,.25);
+  --quad-title:    #d4788a;
+  --quad-sep:      rgba(255,150,175,.18);
+  --leg-text:      #c0506a;
+  --leg-sep:       rgba(255,150,175,.4);
+  --leg-note:      #c87888;
+  --leg-opt:       #d060a0;
+  --leg-bg:        linear-gradient(90deg,rgba(255,210,220,.3),rgba(255,230,235,.15));
+  --leg-border:    rgba(255,160,180,.2);
+
+  --hdr-bg:        linear-gradient(120deg,#f5628a 0%,#e8406e 45%,#c82858 100%);
+  --hdr-shadow:    rgba(220,50,100,.4);
+  --hdr-yr1:       linear-gradient(120deg,#f06080,#d84068);
+  --hdr-yr2:       linear-gradient(120deg,#e85878,#c83860);
+  --hdr-yr3:       linear-gradient(120deg,#e05070,#c03058);
+  --hdr-yr4:       linear-gradient(120deg,#d84868,#b82850);
+  --hdr-yr5:       linear-gradient(120deg,#d04060,#b02048);
+
+  --year-bg:       #fffbfc;
+  --year-shadow:   rgba(220,80,120,.1);
+
+  --apr-bg:  #c82050; --apr-tx:  #ffffff;
+  --reg-bg:  #f07090; --reg-tx:  #ffffff;
+  --can-bg:  #fce0e8; --can-tx:  #a03050;
+  --pend-bg: #faeef2; --pend-tx: #d090a0;
+
+  --card-num-pend-bg:  rgba(200,80,100,.06);  --card-num-pend-tx:  rgba(200,120,140,.5);
+  --card-num-can-bg:   rgba(200,60,90,.07);   --card-num-can-tx:   rgba(160,40,70,.5);
+  --card-num-reg-bg:   rgba(0,0,0,.10);       --card-num-reg-tx:   rgba(255,255,255,.75);
+  --card-num-apr-bg:   rgba(0,0,0,.14);       --card-num-apr-tx:   rgba(255,255,255,.8);
+
+  --pop-bg:       #ffffff;
+  --pop-border:   rgba(240,120,150,.3);
+  --pop-shadow:   0 16px 48px rgba(220,60,100,.18),0 2px 10px rgba(0,0,0,.06);
+  --pop-title:    #8a1a38;
+  --pop-sep:      #fce8ee;
+  --pop-meta:     #d088a0;
+  --pop-btn-tx:   #c07888;
+  --pop-btn-hbg:  #fff0f4;
+  --pop-btn-hbor: #f8c8d4;
+  --pop-btn-abg:  #ffe8ee;
+  --pop-btn-abor: #f0a0b8;
+  --pop-pend-act: #b07080;
+  --pop-warn-bg:  #fff0f3;
+  --pop-warn-bor: rgba(220,60,90,.2);
+  --pop-warn-tx:  #b03050;
+  --pop-warn-ttl: #d04060;
+}
+/* Girly body overrides */
+[data-theme="girly"] body{
+  font-family:'DM Sans',sans-serif;
+  background-image:
+    radial-gradient(ellipse at 10% 5%,  rgba(255,180,200,.18) 0%, transparent 45%),
+    radial-gradient(ellipse at 90% 95%, rgba(255,200,215,.14) 0%, transparent 45%),
+    url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.2' fill='rgba(240,130,160,.12)'/%3E%3C/svg%3E");
+}
+[data-theme="girly"] .hdr-left h1{font-family:'Playfair Display',serif;font-style:italic;letter-spacing:.01em}
+[data-theme="girly"] .year-hdr{font-family:'Playfair Display',serif;font-style:italic;letter-spacing:.05em;position:relative;padding-bottom:12px}
+[data-theme="girly"] .year-hdr::after{
+  content:'';position:absolute;bottom:-6px;left:0;right:0;height:12px;
+  background:
+    radial-gradient(circle at 10px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 30px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 50px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 70px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 90px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 110px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 130px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 150px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 170px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 190px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 210px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 230px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 250px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 270px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 290px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 310px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 330px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 350px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 370px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 390px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 410px 0,var(--year-bg) 6px,transparent 7px),
+    radial-gradient(circle at 430px 0,var(--year-bg) 6px,transparent 7px);
+  background-size:20px 12px;background-repeat:repeat-x;
+  z-index:2;pointer-events:none;
+}
+[data-theme="girly"] .year-block{border:1.5px solid rgba(240,140,165,.2)}
+[data-theme="girly"] .card-name{font-family:'DM Sans',sans-serif;font-weight:600}
+[data-theme="girly"] .pop-name{font-family:'Playfair Display',serif;font-style:italic}
+[data-theme="girly"] header{position:relative}
+[data-theme="girly"] header::after{
+  content:'🎀';font-size:1.2em;
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  pointer-events:none;opacity:.35;
+}
+
+/* ── DARK ──────────────────────────────────────────────── */
+[data-theme="dark"]{
+  --body-bg:       #0f1014;
+  --body-noise1:   rgba(0,0,0,0);
+  --body-noise2:   rgba(0,0,0,0);
+  --surface:       #161b22;
+  --surface2:      #1c2128;
+  --quad-border:   rgba(255,255,255,.07);
+  --quad-title:    #4a5068;
+  --quad-sep:      rgba(255,255,255,.05);
+  --leg-text:      #5a5f78;
+  --leg-sep:       #2a2d38;
+  --leg-note:      #4a4f68;
+  --leg-opt:       #6040a0;
+  --leg-bg:        #13151a;
+  --leg-border:    #1e2430;
+
+  --hdr-bg:        linear-gradient(120deg,#0d1017 0%,#12151e 100%);
+  --hdr-shadow:    rgba(0,0,0,.5);
+  --hdr-yr1:       linear-gradient(120deg,#1a2240,#0a1530);
+  --hdr-yr2:       linear-gradient(120deg,#1a2240,#0a1530);
+  --hdr-yr3:       linear-gradient(120deg,#1a2240,#0a1530);
+  --hdr-yr4:       linear-gradient(120deg,#1a2240,#0a1530);
+  --hdr-yr5:       linear-gradient(120deg,#1a2240,#0a1530);
+
+  --year-bg:       #161b22;
+  --year-shadow:   rgba(0,0,0,.4);
+
+  --apr-bg:  #0d1f0f; --apr-tx:  #38b060;
+  --reg-bg:  #1e1a0e; --reg-tx:  #c8a03c;
+  --can-bg:  #0e1420; --can-tx:  #5a88c0;
+  --pend-bg: #0d1018; --pend-tx: #2e3550;
+
+  --card-num-pend-bg:  rgba(255,255,255,.02); --card-num-pend-tx:  #252a3a;
+  --card-num-can-bg:   rgba(255,255,255,.03); --card-num-can-tx:   #3a5080;
+  --card-num-reg-bg:   rgba(255,255,255,.03); --card-num-reg-tx:   #806020;
+  --card-num-apr-bg:   rgba(255,255,255,.03); --card-num-apr-tx:   #206030;
+
+  --pop-bg:       #14161d;
+  --pop-border:   #252a38;
+  --pop-shadow:   0 14px 48px rgba(0,0,0,.85);
+  --pop-title:    #e0e4f0;
+  --pop-sep:      #1e2430;
+  --pop-meta:     #4a5068;
+  --pop-btn-tx:   #4a5068;
+  --pop-btn-hbg:  #1c2128;
+  --pop-btn-hbor: #2a3040;
+  --pop-btn-abg:  #1c2128;
+  --pop-btn-abor: #2a3040;
+  --pop-pend-act: #6070a0;
+  --pop-warn-bg:  rgba(220,60,60,.06);
+  --pop-warn-bor: rgba(220,60,60,.15);
+  --pop-warn-tx:  #c05050;
+  --pop-warn-ttl: #e06060;
+}
+
+/* ── LIGHT ─────────────────────────────────────────────── */
+[data-theme="light"]{
+  --body-bg:       #f0f4f8;
+  --body-noise1:   rgba(60,120,220,.04);
+  --body-noise2:   rgba(40,180,160,.04);
+  --surface:       #ffffff;
+  --surface2:      #f8fafb;
+  --quad-border:   rgba(100,140,200,.15);
+  --quad-title:    #8090b0;
+  --quad-sep:      rgba(100,140,200,.1);
+  --leg-text:      #5060a0;
+  --leg-sep:       #d0d8e8;
+  --leg-note:      #8090b0;
+  --leg-opt:       #6050c0;
+  --leg-bg:        linear-gradient(90deg,rgba(200,220,255,.2),rgba(180,240,220,.1));
+  --leg-border:    rgba(100,140,200,.12);
+
+  --hdr-bg:        linear-gradient(120deg,#2060d0 0%,#1a90c0 55%,#0a80b0 100%);
+  --hdr-shadow:    rgba(20,80,180,.3);
+  --hdr-yr1:       linear-gradient(120deg,#2060d0,#1080b8);
+  --hdr-yr2:       linear-gradient(120deg,#1858c8,#0878b0);
+  --hdr-yr3:       linear-gradient(120deg,#1050c0,#0070a8);
+  --hdr-yr4:       linear-gradient(120deg,#0848b8,#0068a0);
+  --hdr-yr5:       linear-gradient(120deg,#0040b0,#006098);
+
+  --year-bg:       #ffffff;
+  --year-shadow:   rgba(40,80,160,.08);
+
+  --apr-bg:  #0f7a48; --apr-tx:  #ffffff;
+  --reg-bg:  #d07010; --reg-tx:  #ffffff;
+  --can-bg:  #dde8f8; --can-tx:  #2040a0;
+  --pend-bg: #e8ecf4; --pend-tx: #8090b0;
+
+  --card-num-pend-bg:  rgba(0,0,0,.04);   --card-num-pend-tx:  rgba(80,100,160,.4);
+  --card-num-can-bg:   rgba(0,0,0,.05);   --card-num-can-tx:   rgba(30,60,160,.45);
+  --card-num-reg-bg:   rgba(0,0,0,.10);   --card-num-reg-tx:   rgba(255,255,255,.7);
+  --card-num-apr-bg:   rgba(0,0,0,.12);   --card-num-apr-tx:   rgba(255,255,255,.7);
+
+  --pop-bg:       #ffffff;
+  --pop-border:   rgba(80,130,220,.2);
+  --pop-shadow:   0 16px 48px rgba(20,80,200,.12),0 2px 8px rgba(0,0,0,.06);
+  --pop-title:    #1a2a60;
+  --pop-sep:      #e8eef8;
+  --pop-meta:     #7090c0;
+  --pop-btn-tx:   #7090b0;
+  --pop-btn-hbg:  #f0f5ff;
+  --pop-btn-hbor: #c0d0f0;
+  --pop-btn-abg:  #e8f0ff;
+  --pop-btn-abor: #a0b8e8;
+  --pop-pend-act: #7080b0;
+  --pop-warn-bg:  #fff8f0;
+  --pop-warn-bor: rgba(220,120,30,.2);
+  --pop-warn-tx:  #b06020;
+  --pop-warn-ttl: #d07030;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════════════════════ */
+body{
+  background:var(--body-bg);
+  background-image:
+    radial-gradient(ellipse at 0% 0%, var(--body-noise1) 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 100%, var(--body-noise2) 0%, transparent 55%);
+  font-family:'Nunito',sans-serif;
+  font-size:13px;
+  min-height:100vh;
+  transition:background .3s, color .3s;
+}
+
+/* ══ HEADER ══════════════════════════════════════════════════ */
+header{
+  background:var(--hdr-bg);
+  padding:14px 26px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;
+  position:sticky;top:0;z-index:500;
+  box-shadow:0 4px 24px var(--hdr-shadow);
+}
+.hdr-left h1{font-size:1.2em;font-weight:900;color:#fff;letter-spacing:.02em;text-shadow:0 2px 10px rgba(0,0,0,.25)}
+.hdr-left p{font-size:.6em;color:rgba(255,255,255,.7);margin-top:2px;letter-spacing:.06em}
+.hdr-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+
+/* Progress pills */
+.prog-pills{display:flex;gap:10px}
+.pill{
+  background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.3);
+  border-radius:30px;padding:6px 14px;backdrop-filter:blur(6px);
+  min-width:128px;display:flex;flex-direction:column;gap:3px;
+}
+.pill-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pill-lbl{font-size:.57em;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.75)}
+.pill-val{font-size:.82em;font-weight:900;color:#fff}
+.pill-track{height:3px;background:rgba(255,255,255,.2);border-radius:3px;overflow:hidden}
+.pill-fill{height:100%;border-radius:3px;background:#fff;transition:width .5s cubic-bezier(.4,0,.2,1)}
+
+/* Header buttons */
+.hdr-btns{display:flex;align-items:center;gap:8px}
+.btn-reset{
+  font-family:'Nunito',inherit;font-size:.68em;font-weight:800;
+  text-transform:uppercase;letter-spacing:.08em;
+  background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.35);
+  color:#fff;border-radius:20px;padding:6px 14px;cursor:pointer;transition:background .15s;
+}
+.btn-reset:hover{background:rgba(255,255,255,.32)}
+
+/* ── Theme switcher ────────────────────────────────────── */
+.theme-switch{
+  display:flex;align-items:center;
+  background:rgba(0,0,0,.25);
+  border:1.5px solid rgba(255,255,255,.2);
+  border-radius:30px;
+  padding:3px;
+  gap:2px;
+  backdrop-filter:blur(8px);
+}
+.theme-btn{
+  font-family:'Nunito',inherit;
+  font-size:.65em;font-weight:800;
+  padding:4px 11px;border-radius:22px;
+  border:none;cursor:pointer;
+  color:rgba(255,255,255,.6);
+  background:transparent;
+  transition:all .2s;
+  letter-spacing:.03em;
+  white-space:nowrap;
+}
+.theme-btn:hover{color:rgba(255,255,255,.9)}
+.theme-btn.active{
+  background:rgba(255,255,255,.22);
+  color:#fff;
+  box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+[data-theme="dark"] .theme-btn[data-t="dark"].active   { background:rgba(255,255,255,.18) }
+[data-theme="light"] .theme-btn[data-t="light"].active  { background:rgba(255,255,255,.28) }
+[data-theme="girly"] .theme-btn[data-t="girly"].active  { background:rgba(255,255,255,.22) }
+
+/* ══ LEGEND ══════════════════════════════════════════════════ */
+.legend{
+  display:flex;flex-wrap:wrap;gap:5px 18px;align-items:center;
+  padding:8px 26px;
+  background:var(--leg-bg);
+  border-bottom:1.5px solid var(--leg-border);
+  font-size:.64em;font-weight:700;color:var(--leg-text);
+  transition:background .3s, color .3s;
+}
+.leg{display:flex;align-items:center;gap:6px}
+.leg-chip{padding:2px 9px;border-radius:5px;font-size:.85em;font-weight:800}
+.lc-apr{background:var(--apr-bg);color:var(--apr-tx)}
+.lc-reg{background:var(--reg-bg);color:var(--reg-tx)}
+.lc-can{background:var(--can-bg);color:var(--can-tx)}
+.lc-pend{background:var(--pend-bg);color:var(--pend-tx)}
+.leg-sep{color:var(--leg-sep);font-size:1.3em;margin:0 2px}
+.leg-note{font-weight:600;color:var(--leg-note);font-size:.92em}
+.leg-opt{color:var(--leg-opt)}
+
+/* ══ MAIN ════════════════════════════════════════════════════ */
+main{padding:20px 20px 60px;overflow-x:auto}
+.years-row{display:flex;gap:12px;min-width:max-content;align-items:flex-start}
+
+/* ── Year block ──────────────────────────────────────────── */
+.year-block{
+  background:var(--year-bg);
+  border-radius:18px;
+  box-shadow:0 4px 20px var(--year-shadow),0 1px 4px rgba(0,0,0,.06);
+  overflow:hidden;flex-shrink:0;
+  transition:background .3s;
+}
+.year-block:nth-child(1) .year-hdr{background:var(--hdr-yr1)}
+.year-block:nth-child(2) .year-hdr{background:var(--hdr-yr2)}
+.year-block:nth-child(3) .year-hdr{background:var(--hdr-yr3)}
+.year-block:nth-child(4) .year-hdr{background:var(--hdr-yr4)}
+.year-block:nth-child(5) .year-hdr{background:var(--hdr-yr5)}
+.year-hdr{
+  padding:11px 18px;text-align:center;
+  font-size:.86em;font-weight:900;letter-spacing:.2em;text-transform:uppercase;
+  color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.3);
+}
+/* Dark theme: year headers get distinct colors via custom approach */
+[data-theme="dark"] .year-block:nth-child(1) .year-hdr{background:linear-gradient(120deg,#1a2840,#0c1a30)}
+[data-theme="dark"] .year-block:nth-child(2) .year-hdr{background:linear-gradient(120deg,#1a2838,#0a1828)}
+[data-theme="dark"] .year-block:nth-child(3) .year-hdr{background:linear-gradient(120deg,#1a2030,#0a1420)}
+[data-theme="dark"] .year-block:nth-child(4) .year-hdr{background:linear-gradient(120deg,#1a1830,#0a1020)}
+[data-theme="dark"] .year-block:nth-child(5) .year-hdr{background:linear-gradient(120deg,#1a1028,#0a0818)}
+[data-theme="dark"] .year-hdr{color:#6070a0}
+
+/* ── Quads ───────────────────────────────────────────────── */
+.year-quads{display:flex;gap:0}
+.quad{
+  padding:12px 11px 14px;min-width:212px;
+  border-right:1.5px dashed var(--quad-border);
+}
+.quad:last-child{border-right:none}
+.quad-title{
+  font-size:.67em;font-weight:800;color:var(--quad-title);
+  text-align:center;letter-spacing:.12em;text-transform:uppercase;
+  padding-bottom:9px;margin-bottom:9px;
+  border-bottom:1.5px solid var(--quad-sep);
+}
+.cards{display:flex;flex-direction:column;gap:6px}
+
+/* ══ CARD ════════════════════════════════════════════════════ */
+.card{
+  display:flex;align-items:stretch;
+  border-radius:10px;cursor:pointer;min-height:50px;
+  overflow:hidden;position:relative;
+  transition:transform .18s cubic-bezier(.2,0,.2,1.4), box-shadow .18s, filter .12s, background .3s;
+  box-shadow:0 2px 6px rgba(0,0,0,.07);
+}
+.card.st-blocked{cursor:default;opacity:.7}
+.card.st-blocked,.card.st-pending{background:var(--pend-bg)}
+.card.st-can     {background:var(--can-bg)}
+.card.st-regular {background:var(--reg-bg)}
+.card.st-approved{background:var(--apr-bg)}
+
+/* ── Hover: Dark theme ── subtle cyan glow outline */
+[data-theme="dark"] .card:hover:not(.st-blocked){
+  transform:translateY(-2px) scale(1.012);
+  box-shadow:0 0 0 1.5px rgba(80,160,255,.35), 0 8px 24px rgba(0,0,0,.5);
+  filter:brightness(1.12);
+}
+[data-theme="dark"] .card.st-regular:hover:not(.st-blocked){
+  box-shadow:0 0 0 1.5px rgba(200,160,60,.3), 0 8px 24px rgba(0,0,0,.5);
+}
+[data-theme="dark"] .card.st-approved:hover:not(.st-blocked){
+  box-shadow:0 0 0 1.5px rgba(50,180,100,.35), 0 8px 24px rgba(0,0,0,.5);
+}
+
+/* ── Hover: Light theme ── clean lift + soft colored shadow */
+[data-theme="light"] .card:hover:not(.st-blocked){
+  transform:translateY(-3px) scale(1.012);
+  box-shadow:0 8px 24px rgba(40,100,220,.15), 0 2px 6px rgba(0,0,0,.07);
+  filter:brightness(1.04);
+}
+[data-theme="light"] .card.st-approved:hover:not(.st-blocked){
+  box-shadow:0 8px 24px rgba(20,160,80,.2), 0 2px 6px rgba(0,0,0,.06);
+}
+[data-theme="light"] .card.st-regular:hover:not(.st-blocked){
+  box-shadow:0 8px 24px rgba(200,130,20,.18), 0 2px 6px rgba(0,0,0,.06);
+}
+
+/* ── Hover: Girly theme ── lift + bounce + pink glow + slight tilt */
+[data-theme="girly"] .card:hover:not(.st-blocked){
+  transform:translateY(-4px) scale(1.02) rotate(-0.4deg);
+  box-shadow:0 10px 28px rgba(220,60,100,.2), 0 2px 8px rgba(200,50,80,.1);
+  filter:brightness(1.05) saturate(1.1);
+}
+[data-theme="girly"] .card.st-can:hover{
+  box-shadow:0 10px 28px rgba(220,80,120,.18), 0 0 0 1.5px rgba(240,130,160,.3);
+}
+[data-theme="girly"] .card.st-approved:hover:not(.st-blocked){
+  box-shadow:0 10px 32px rgba(200,30,70,.25), 0 0 0 2px rgba(220,50,90,.2);
+}
+/* Girly card inner shine on hover */
+[data-theme="girly"] .card:not(.st-blocked)::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.18) 0%,transparent 60%);
+  opacity:0;transition:opacity .2s;
+  pointer-events:none;border-radius:inherit;
+}
+[data-theme="girly"] .card:hover:not(.st-blocked)::before{opacity:1}
+
+/* Dark theme: add borders on cards */
+[data-theme="dark"] .card.st-can     {border:1px solid rgba(80,120,220,.2)}
+[data-theme="dark"] .card.st-regular {border:1px solid rgba(200,160,60,.2)}
+[data-theme="dark"] .card.st-approved{border:1px solid rgba(50,180,100,.2)}
+
+.card-body{flex:1;padding:9px 9px 9px 8px;display:flex;flex-direction:column;justify-content:center;gap:2px}
+.card-name{font-size:.84em;font-weight:700;line-height:1.3}
+.card.st-blocked .card-name,.card.st-pending .card-name{color:var(--pend-tx)}
+.card.st-can      .card-name{color:var(--can-tx)}
+.card.st-regular  .card-name{color:var(--reg-tx)}
+.card.st-approved .card-name{color:var(--apr-tx)}
+.card-sub{font-size:.65em;font-weight:600;opacity:.7;margin-top:2px}
+
+/* Dark mode: force white bold text everywhere on cards */
+[data-theme="dark"] .card-name{color:#d8dde8!important;font-weight:800}
+[data-theme="dark"] .card-sub{color:#8090a8!important;opacity:1;font-weight:700}
+
+.card-ic{
+  width:38px;min-width:38px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1em;flex-shrink:0;
+  border-left:1px solid rgba(0,0,0,.06);
+}
+.card.st-blocked .card-ic,.card.st-pending .card-ic{background:rgba(0,0,0,.04)}
+.card.st-can      .card-ic{background:rgba(0,0,0,.06)}
+.card.st-regular  .card-ic{background:rgba(0,0,0,.09)}
+.card.st-approved .card-ic{background:rgba(0,0,0,.1)}
+
+.card-num{
+  width:38px;min-width:38px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.02em;font-weight:900;flex-shrink:0;
+  border-right:1px solid rgba(0,0,0,.07);
+}
+.card.st-blocked .card-num,.card.st-pending .card-num{background:var(--card-num-pend-bg);color:var(--card-num-pend-tx)}
+.card.st-can      .card-num{background:var(--card-num-can-bg); color:var(--card-num-can-tx)}
+.card.st-regular  .card-num{background:var(--card-num-reg-bg); color:var(--card-num-reg-tx)}
+.card.st-approved .card-num{background:var(--card-num-apr-bg); color:var(--card-num-apr-tx)}
+
+/* Dark mode: white bright numbers */
+[data-theme="dark"] .card-num{color:#9090b8!important;font-weight:900}
+[data-theme="dark"] .card.st-regular  .card-num{color:#c8a03c!important}
+[data-theme="dark"] .card.st-approved .card-num{color:#38b060!important}
+[data-theme="dark"] .card.st-can      .card-num{color:#5a88c0!important}
+
+.opt-bar{
+  position:absolute;top:0;left:36px;right:36px;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(160,80,240,.5),transparent);
+}
+
+/* ══ POPUP ════════════════════════════════════════════════════ */
+#popup{
+  position:fixed;z-index:700;
+  background:var(--pop-bg);
+  border:2px solid var(--pop-border);
+  border-radius:16px;padding:13px 11px 11px;
+  box-shadow:var(--pop-shadow);
+  display:none;min-width:234px;max-width:255px;
+  transition:background .3s, border-color .3s;
+}
+.pop-name{
+  font-size:.85em;font-weight:800;color:var(--pop-title);
+  padding:0 6px 9px;border-bottom:2px solid var(--pop-sep);
+  margin-bottom:8px;line-height:1.3;
+}
+.pop-meta{font-size:.6em;font-weight:600;color:var(--pop-meta);display:block;margin-top:2px}
+.pop-btns{display:flex;flex-direction:column;gap:4px}
+.pop-btn{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 9px;border-radius:9px;cursor:pointer;
+  border:1.5px solid transparent;transition:all .12s;background:transparent;
+  font-family:'Nunito',inherit;font-size:.75em;font-weight:700;
+  color:var(--pop-btn-tx);text-align:left;width:100%;
+}
+.pop-btn:hover{background:var(--pop-btn-hbg);border-color:var(--pop-btn-hbor)}
+.pop-btn.active{background:var(--pop-btn-abg);border-color:var(--pop-btn-abor)}
+.pop-ic{font-size:1.1em;width:22px;text-align:center;flex-shrink:0}
+.pop-btn.b-pend.active{color:var(--pop-pend-act)}
+.pop-btn.b-reg.active {color:var(--reg-bg)}
+.pop-btn.b-apr.active {color:var(--apr-bg)}
+[data-theme="dark"] .pop-btn.b-reg.active{color:#c8a03c}
+[data-theme="dark"] .pop-btn.b-apr.active{color:#38b060}
+
+.pop-alert{
+  margin-top:8px;padding:8px 10px;border-radius:9px;
+  background:var(--pop-warn-bg);border:1.5px solid var(--pop-warn-bor);
+  font-size:.63em;font-weight:700;line-height:1.7;color:var(--pop-warn-tx);
+  display:none;
+}
+.pop-alert strong{display:block;margin-bottom:3px;color:var(--pop-warn-ttl);font-size:1.05em}
+.wr{color:#c08030}.wa{color:#c04040}
+
+/* ══ MOBILE ═════════════════════════════════════════════════ */
+@media(max-width:700px){
+  header{padding:10px 12px;gap:7px}
+  .hdr-left h1{font-size:.95em}
+  .hdr-left p{display:none}
+  .prog-pills{gap:7px}
+  .pill{min-width:92px;padding:5px 10px}
+  .pill-val{font-size:.72em}
+  .btn-reset{padding:5px 10px;font-size:.63em}
+  .theme-btn{padding:4px 8px;font-size:.6em}
+  .legend{padding:7px 14px;gap:4px 12px;font-size:.6em}
+  .leg-note{display:none}
+  main{padding:14px 12px 40px;overflow-x:hidden}
+  .years-row{flex-direction:column;min-width:unset;gap:14px;align-items:stretch}
+  .year-block{flex-shrink:unset;width:100%}
+  .year-hdr{font-size:.72em;padding:9px 14px}
+  .year-quads{flex-direction:column}
+  .quad{
+    min-width:unset;width:100%;padding:11px 12px 13px;
+    border-right:none;border-bottom:1.5px dashed var(--quad-border);
+  }
+  .quad:last-child{border-bottom:none}
+  .card{min-height:46px}
+  .card-num{width:32px;min-width:32px;font-size:.82em}
+  .card-ic{width:32px;min-width:32px;font-size:.85em}
+  .card-name{font-size:.7em}
+  .card-sub{font-size:.52em}
+  #popup{
+    left:0!important;right:0!important;top:auto!important;bottom:0!important;
+    width:100%!important;max-width:100%!important;
+    border-radius:18px 18px 0 0;border-bottom:none;padding:16px 14px 28px;
+  }
+}
+
+/* ══ ANIMATIONS ═════════════════════════════════════════════ */
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+@keyframes popIn{from{opacity:0;transform:scale(.95) translateY(4px)}to{opacity:1;transform:scale(1) translateY(0)}}
+body:not(.loaded) .year-block{animation:popIn .28s cubic-bezier(.2,0,.2,1.4) both}
+body:not(.loaded) .year-block:nth-child(1){animation-delay:.04s}
+body:not(.loaded) .year-block:nth-child(2){animation-delay:.09s}
+body:not(.loaded) .year-block:nth-child(3){animation-delay:.14s}
+body:not(.loaded) .year-block:nth-child(4){animation-delay:.19s}
+body:not(.loaded) .year-block:nth-child(5){animation-delay:.24s}
+
+/* Card approve flash */
+@keyframes approveFlash{
+  0%  {transform:scale(1)}
+  30% {transform:scale(1.06)}
+  60% {transform:scale(.98)}
+  100%{transform:scale(1)}
+}
+.card.just-approved{animation:approveFlash .38s cubic-bezier(.2,0,.2,1.4)}
+
+/* ── Particles (floating on approval) ─────────────────── */
+.particle{
+  position:fixed;pointer-events:none;z-index:9999;
+  font-size:1.1em;line-height:1;
+  animation:particleFly var(--dur,.8s) ease-out forwards;
+  transform-origin:center;
+}
+@keyframes particleFly{
+  0%  {opacity:1;transform:translate(0,0) scale(1) rotate(0deg)}
+  100%{opacity:0;transform:translate(var(--tx,0px),var(--ty,-80px)) scale(.4) rotate(var(--rot,180deg))}
+}
+
+/* Dark theme: use minimal pulse instead of particles */
+[data-theme="dark"] .particle{filter:hue-rotate(180deg) brightness(1.5)}
+[data-theme="light"] .particle{filter:saturate(1.3) brightness(1.1)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-left">
+    <h1>🎓 Ingeniería Electrónica · Plan 2012</h1>
+    <p>FACENA – UNNE &nbsp;·&nbsp; Res. Nº 3391/12 &nbsp;·&nbsp; Malla Curricular Interactiva</p>
+  </div>
+  <div class="hdr-right">
+    <div class="prog-pills">
+      <div class="pill">
+        <div class="pill-top">
+          <span class="pill-lbl">✅ Aprobadas</span>
+          <span class="pill-val" id="val-apr">0%</span>
+        </div>
+        <div class="pill-track"><div class="pill-fill" id="fill-apr" style="width:0%"></div></div>
+      </div>
+      <div class="pill">
+        <div class="pill-top">
+          <span class="pill-lbl">📖 Regulares</span>
+          <span class="pill-val" id="val-reg">0%</span>
+        </div>
+        <div class="pill-track"><div class="pill-fill" id="fill-reg" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="hdr-btns">
+      <div class="theme-switch">
+        <button class="theme-btn" data-t="dark"  onclick="setTheme('dark')">🌙 Oscuro</button>
+        <button class="theme-btn" data-t="light" onclick="setTheme('light')">☀️ Claro</button>
+        <button class="theme-btn active" data-t="girly" onclick="setTheme('girly')">🌸 Girly</button>
+      </div>
+      <button class="btn-reset" onclick="resetAll()">↺ Reiniciar</button>
+    </div>
+  </div>
+</header>
+
+<div class="legend">
+  <div class="leg"><span class="leg-chip lc-apr">✅ Aprobada</span></div>
+  <div class="leg"><span class="leg-chip lc-reg">📖 Regular</span></div>
+  <div class="leg"><span class="leg-chip lc-can">🔓 Puedo cursar</span></div>
+  <div class="leg"><span class="leg-chip lc-pend">🔒 Pendiente</span></div>
+  <span class="leg-sep">|</span>
+  <span class="leg-opt" style="font-size:.85em">▬ Optativa</span>
+  <span class="leg-sep">|</span>
+  <span class="leg-note">Click en una materia para cambiar su estado · 4136 hs totales</span>
+</div>
+
+<main>
+  <div class="years-row" id="grid"></div>
+</main>
+
+<div id="popup">
+  <div class="pop-name" id="pop-name">—<span class="pop-meta" id="pop-meta"></span></div>
+  <div class="pop-btns">
+    <button class="pop-btn b-pend" onclick="setFromPop(0)">
+      <span class="pop-ic">🔒</span><span>Sin cursar / Pendiente</span>
+    </button>
+    <button class="pop-btn b-reg" onclick="setFromPop(1)">
+      <span class="pop-ic">📖</span><span>Regular</span>
+    </button>
+    <button class="pop-btn b-apr" onclick="setFromPop(2)">
+      <span class="pop-ic">✅</span><span>Aprobada</span>
+    </button>
+  </div>
+  <div class="pop-alert" id="pop-alert"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// THEME
+// ═══════════════════════════════════════════════════════════
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  document.querySelectorAll('.theme-btn').forEach(b=>b.classList.toggle('active',b.dataset.t===t));
+  try{localStorage.setItem('elec12-theme',t);}catch(e){}
+}
+// Load saved theme
+try{const t=localStorage.getItem('elec12-theme');if(t)setTheme(t);}catch(e){}
+
+// ═══════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════
+const S = {
+  aga:     {n:'Álgebra y Geometría Analítica',h:160,r_c:[],a_c:[],a_r:[]},
+  cdi1:    {n:'Cálculo Dif. e Integral I',h:112,r_c:[],a_c:[],a_r:[]},
+  quim:    {n:'Química General',h:112,r_c:[],a_c:[],a_r:[]},
+  sem1:    {n:'Seminario de Ingeniería I',h:32,r_c:[],a_c:[],a_r:[]},
+  sisrep:  {n:'Sistemas de Representación',h:96,r_c:[],a_c:[],a_r:[]},
+  info:    {n:'Informática',h:80,r_c:[],a_c:[],a_r:[]},
+  cdi2:    {n:'Cálculo Dif. e Integral II',h:128,r_c:['cdi1'],a_c:[],a_r:['cdi1']},
+  mos:     {n:'Mecánica, Óptica y Sonido',h:160,r_c:['cdi1','aga'],a_c:[],a_r:['cdi1','aga']},
+  emc:     {n:'Electricidad, Magnetismo y Calor',h:160,r_c:['mos'],a_c:['cdi1'],a_r:['mos','cdi1']},
+  ead:     {n:'Estadística y Análisis de Datos',h:80,r_c:['cdi2','aga'],a_c:['cdi1'],a_r:['cdi2','aga','cdi1']},
+  fisato:  {n:'Física Atómica',h:64,r_c:['mos'],a_c:[],a_r:['mos']},
+  sem2:    {n:'Seminario de Ingeniería II',h:32,r_c:[],a_c:['sem1'],a_r:['sem1']},
+  elect1:  {n:'Electrotecnia I',h:128,r_c:['emc'],a_c:['mos','cdi2'],a_r:['emc','mos','cdi2']},
+  matcomp: {n:'Materiales y Componentes',h:112,r_c:['emc'],a_c:['quim'],a_r:['emc','quim']},
+  fes:     {n:'Física del Estado Sólido',h:96,r_c:['emc'],a_c:[],a_r:['emc']},
+  metnum:  {n:'Métodos Numéricos',h:64,r_c:['info'],a_c:['aga','cdi1'],a_r:['info','aga','cdi1']},
+  am:      {n:'Análisis Matemático',h:96,r_c:[],a_c:['cdi2'],a_r:['cdi2']},
+  elect2:  {n:'Electrotecnia II',h:128,r_c:['elect1'],a_c:[],a_r:['elect1']},
+  medeelec:{n:'Medidas Eléctricas',h:128,r_c:['elect1','ead'],a_c:[],a_r:['elect1','ead']},
+  teorcir: {n:'Teoría de Circuitos',h:112,r_c:['am'],a_c:['elect1'],a_r:['am','elect1']},
+  eleci:   {n:'Electrónica I',h:128,r_c:['matcomp'],a_c:['elect1','fes'],a_r:['matcomp','elect1','fes']},
+  electromag:{n:'Electromagnetismo',h:112,r_c:['am','fisato'],a_c:[],a_r:['am','fisato']},
+  sem3:    {n:'Seminario de Ingeniería III',h:32,r_c:[],a_c:['sem2'],a_r:['sem2']},
+  tctrl:   {n:'Teoría de Control',h:96,r_c:['teorcir'],a_c:['am'],a_r:['teorcir','am']},
+  elecii:  {n:'Electrónica II',h:128,r_c:['eleci'],a_c:[],a_r:['eleci']},
+  circlog: {n:'Circuitos Lógicos',h:80,r_c:[],a_c:['eleci'],a_r:['eleci']},
+  syss:    {n:'Señales y Sistemas',h:80,r_c:['teorcir'],a_c:[],a_r:['teorcir']},
+  sem4:    {n:'Seminario de Ingeniería IV',h:32,r_c:[],a_c:['sem3'],a_r:['sem3']},
+  elecing: {n:'Electrónica Industrial',h:128,r_c:[],a_c:['elect2','eleci'],a_r:['elect2','eleci']},
+  eleciii: {n:'Electrónica III',h:112,r_c:['circlog'],a_c:['eleci'],a_r:['circlog','eleci']},
+  medelectr:{n:'Mediciones Electrónicas',h:128,r_c:['elecii'],a_c:['medeelec'],a_r:['elecii','medeelec']},
+  opt1fc:  {n:'Fund. de Comunicaciones',h:96,opt:1,r_c:['elecii'],a_c:['eleci','electromag'],a_r:['elecii','eleci','electromag']},
+  opt1bi:  {n:'Bioinstrumentación',h:96,opt:1,r_c:['elecii'],a_c:['eleci','electromag'],a_r:['elecii','eleci','electromag']},
+  inglegal:{n:'Ingeniería Legal',h:80,r_c:[],a_c:['sem4'],a_r:['sem4']},
+  sem5:    {n:'Seminario de Ingeniería V',h:32,r_c:[],a_c:['sem4'],a_r:['sem4']},
+  opt2pa:  {n:'Propagación y Antenas',h:96,opt:1,r_c:['opt1fc'],a_c:['syss'],a_r:['opt1fc','syss']},
+  opt2pdb: {n:'Proc. Digital de Bioseñales',h:96,opt:1,r_c:['opt1bi'],a_c:['syss'],a_r:['opt1bi','syss']},
+  opt3ti:  {n:'Transmisión de la Información',h:112,opt:1,r_c:['opt1fc'],a_c:['syss'],a_r:['opt1fc','syss']},
+  opt3msf: {n:'Mod. y Sim. Sist. Fisiológicos',h:112,opt:1,r_c:['opt1bi'],a_c:['syss'],a_r:['opt1bi','syss']},
+  pf:      {n:'Proyecto Final',h:176,r_c:['elecing','eleciii','medelectr'],a_c:['tctrl'],a_r:['elecing','eleciii','medelectr','tctrl']},
+  pps:     {n:'Práctica Prof. Supervisada',h:200,r_c:[],a_c:[],a_r:[]},
+  ecoorg:  {n:'Economía y Org. Industrial',h:96,r_c:[],a_c:['sem3'],a_r:['sem3']},
+  opt4sc:  {n:'Sistemas de Comunicación',h:112,opt:1,r_c:['opt2pa','opt3ti'],a_c:[],a_r:['opt2pa','opt3ti']},
+  opt4ic:  {n:'Ingeniería Clínica',h:112,opt:1,r_c:['opt2pdb','opt3msf'],a_c:[],a_r:['opt2pdb','opt3msf']},
+};
+const TOTAL_H=Object.values(S).reduce((s,v)=>s+v.h,0);
+const ORDER=['aga','cdi1','quim','sem1','sisrep','info','cdi2','mos','emc','ead','fisato','sem2','elect1','matcomp','fes','metnum','am','elect2','medeelec','teorcir','eleci','electromag','sem3','tctrl','elecii','circlog','syss','sem4','elecing','eleciii','medelectr','opt1fc','opt1bi','inglegal','sem5','opt2pa','opt2pdb','opt3ti','opt3msf','pf','pps','ecoorg','opt4sc','opt4ic'];
+const NUM={}; ORDER.forEach((id,i)=>NUM[id]=i+1);
+const YEARS=[
+  {title:'Año 1',quads:[
+    {title:'1° Cuatrimestre',ids:['aga','cdi1','quim','sem1']},
+    {title:'2° Cuatrimestre',ids:['sisrep','info','cdi2','mos']},
+  ]},
+  {title:'Año 2',quads:[
+    {title:'1° Cuatrimestre',ids:['emc','ead','fisato','sem2']},
+    {title:'2° Cuatrimestre',ids:['elect1','matcomp','fes','metnum']},
+  ]},
+  {title:'Año 3',quads:[
+    {title:'1° Cuatrimestre',ids:['am','elect2','medeelec']},
+    {title:'2° Cuatrimestre',ids:['teorcir','eleci','electromag','sem3']},
+  ]},
+  {title:'Año 4',quads:[
+    {title:'1° Cuatrimestre',ids:['tctrl','elecii','circlog','syss','sem4']},
+    {title:'2° Cuatrimestre',ids:['elecing','eleciii','medelectr','opt1fc','opt1bi']},
+  ]},
+  {title:'Año 5',quads:[
+    {title:'1° Cuatrimestre',ids:['inglegal','sem5','opt2pa','opt2pdb','opt3ti','opt3msf']},
+    {title:'Anual',ids:['pf','pps']},
+    {title:'2° Cuatrimestre',ids:['ecoorg','opt4sc','opt4ic']},
+  ]},
+];
+
+// ═══════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════
+const state={};
+Object.keys(S).forEach(id=>state[id]=0);
+try{const sv=localStorage.getItem('elec12v5');if(sv)Object.assign(state,JSON.parse(sv));}catch(e){}
+const save=()=>{try{localStorage.setItem('elec12v5',JSON.stringify(state));}catch(e){}};
+
+function getStatus(id){
+  const v=state[id];
+  if(v===1)return'regular';
+  if(v===2)return'approved';
+  const s=S[id];
+  return(s.r_c.every(d=>state[d]>=1)&&s.a_c.every(d=>state[d]>=2))||(s.r_c.length===0&&s.a_c.length===0)?'can':'blocked';
+}
+function getMissing(id){
+  const s=S[id],m=[];
+  s.r_c.forEach(d=>{if(state[d]<1)m.push({n:S[d].n,need:'Regular',t:'r'});});
+  s.a_c.forEach(d=>{if(state[d]<2)m.push({n:S[d].n,need:'Aprobada',t:'a'});});
+  return m;
+}
+
+const ICON={can:'🔓',regular:'📖',approved:'✅',blocked:'🔒'};
+const CLS ={can:'st-can',regular:'st-regular',approved:'st-approved',blocked:'st-blocked'};
+
+// ═══════════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════════
+function render(){
+  const grid=document.getElementById('grid');
+  grid.innerHTML='';
+  YEARS.forEach(year=>{
+    const yb=document.createElement('div');yb.className='year-block';
+    const yh=document.createElement('div');yh.className='year-hdr';yh.textContent=year.title;yb.appendChild(yh);
+    const yq=document.createElement('div');yq.className='year-quads';
+    year.quads.forEach(quad=>{
+      const qc=document.createElement('div');qc.className='quad';
+      const qt=document.createElement('div');qt.className='quad-title';qt.textContent=quad.title;qc.appendChild(qt);
+      const cl=document.createElement('div');cl.className='cards';
+      quad.ids.forEach(id=>{
+        const s=S[id],st=getStatus(id);
+        const card=document.createElement('div');
+        card.className='card '+(CLS[st]||'');card.dataset.id=id;
+        card.innerHTML=`${s.opt?'<div class="opt-bar"></div>':''}<div class="card-num">${NUM[id]}</div><div class="card-body"><div class="card-name">${s.n}</div><span class="card-sub">${s.h} hs${s.opt?' · Opt.':''}</span></div><div class="card-ic">${ICON[st]}</div>`;
+        card.addEventListener('click',e=>{e.stopPropagation();openPopup(id,card);});
+        cl.appendChild(card);
+      });
+      qc.appendChild(cl);yq.appendChild(qc);
+    });
+    yb.appendChild(yq);grid.appendChild(yb);
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  const aprH=Object.keys(S).filter(id=>state[id]===2).reduce((s,id)=>s+S[id].h,0);
+  const regH=Object.keys(S).filter(id=>state[id]===1).reduce((s,id)=>s+S[id].h,0);
+  const pA=Math.round(aprH/TOTAL_H*100),pR=Math.round(regH/TOTAL_H*100);
+  document.getElementById('fill-apr').style.width=pA+'%';
+  document.getElementById('fill-reg').style.width=pR+'%';
+  document.getElementById('val-apr').textContent=pA+'% · '+aprH+' hs';
+  document.getElementById('val-reg').textContent=pR+'% · '+regH+' hs';
+}
+
+// ═══════════════════════════════════════════════════════════
+// POPUP
+// ═══════════════════════════════════════════════════════════
+let popId=null;
+const popup=document.getElementById('popup');
+
+function openPopup(id,cardEl){
+  popId=id;
+  const s=S[id];
+  document.getElementById('pop-name').childNodes[0].textContent=s.n;
+  document.getElementById('pop-meta').textContent=s.h+' horas'+(s.opt?' · Optativa':'');
+  popup.querySelectorAll('.pop-btn').forEach((b,i)=>b.classList.toggle('active',i===state[id]));
+  const miss=getMissing(id);
+  const ad=document.getElementById('pop-alert');
+  if(miss.length){
+    ad.innerHTML='<strong>Requisitos faltantes:</strong>'+miss.map(m=>`<span class="w${m.t}">· ${m.n} → ${m.need}</span>`).join('<br>');
+    ad.style.display='block';
+  }else{ad.style.display='none';}
+  popup.style.display='block';
+  const r=cardEl.getBoundingClientRect();
+  let left=r.right+10,top=r.top;
+  if(left+260>window.innerWidth)left=r.left-258;
+  if(top+popup.offsetHeight>window.innerHeight)top=window.innerHeight-popup.offsetHeight-10;
+  popup.style.left=left+'px';popup.style.top=Math.max(10,top)+'px';
+}
+function closePopup(){popup.style.display='none';popId=null;}
+document.addEventListener('click',e=>{if(!popup.contains(e.target))closePopup();});
+
+// ═══════════════════════════════════════════════════════════
+// CELEBRATION PARTICLES
+// ═══════════════════════════════════════════════════════════
+function celebrate(cardEl){
+  const theme = document.documentElement.getAttribute('data-theme');
+  // Per-theme emojis
+  const sets = {
+    girly: ['🌸','💕','✨','🎀','💖','🌷','⭐','💗'],
+    dark:  ['✦','·','✧','⋆','★','✦','·','✧'],
+    light: ['✅','⭐','✨','🎉','💡','✦','⭐','✨'],
+  };
+  const emojis = sets[theme] || sets.girly;
+  const count = theme === 'dark' ? 6 : 10;
+  const rect = cardEl.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top  + rect.height / 2;
+
+  for(let i = 0; i < count; i++){
+    const el = document.createElement('div');
+    el.className = 'particle';
+    el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    const angle = (Math.PI * 2 / count) * i + (Math.random()-.5)*.6;
+    const dist  = 55 + Math.random() * 55;
+    el.style.cssText = `
+      left:${cx}px; top:${cy}px;
+      --tx:${Math.cos(angle)*dist}px;
+      --ty:${Math.sin(angle)*dist - 30}px;
+      --rot:${Math.round(Math.random()*360)}deg;
+      --dur:${.55 + Math.random()*.35}s;
+      font-size:${.75 + Math.random()*.55}em;
+    `;
+    document.body.appendChild(el);
+    el.addEventListener('animationend',()=>el.remove());
+  }
+  // Flash the card
+  cardEl.classList.remove('just-approved');
+  void cardEl.offsetWidth;
+  cardEl.classList.add('just-approved');
+  cardEl.addEventListener('animationend',()=>cardEl.classList.remove('just-approved'),{once:true});
+}
+
+// ═══════════════════════════════════════════════════════════
+// CASCADE RESET — when a subject is lowered, invalidate dependents
+// ═══════════════════════════════════════════════════════════
+function cascadeReset(changedId, newValue){
+  // BFS: find all subjects whose current state is now invalid
+  const queue = [changedId];
+  const visited = new Set();
+  while(queue.length){
+    const src = queue.shift();
+    if(visited.has(src)) continue;
+    visited.add(src);
+    Object.keys(S).forEach(dep => {
+      if(state[dep] === 0) return; // already reset, nothing to do
+      const s = S[dep];
+      // Check if `src` is a correlativa of `dep`
+      const needsReg  = s.r_c.includes(src);
+      const needsApr  = s.a_c.includes(src) || s.a_r.includes(src);
+      const srcVal    = state[src];
+      let violated = false;
+      if(needsReg && srcVal < 1) violated = true;  // needed Regular, now below
+      if(needsApr && srcVal < 2) violated = true;  // needed Aprobada, now below
+      if(violated){
+        state[dep] = 0;
+        queue.push(dep); // propagate further
+      }
+    });
+  }
+}
+
+const isMobile=()=>window.innerWidth<=700;
+
+function setFromPop(target){
+  if(!popId)return;
+  const id=popId;
+
+  if(target===0){
+    const prev=state[id];
+    state[id]=0;
+    if(prev>0) cascadeReset(id,0);
+    save();render();closePopup();return;
+  }
+
+  const miss=getMissing(id);
+  if(miss.length&&target>=1){
+    const ad=document.getElementById('pop-alert');
+    ad.innerHTML='<strong>⚠ No podés marcarla aún:</strong>'+miss.map(m=>`<span class="w${m.t}">· ${m.n} → ${m.need}</span>`).join('<br>');
+    ad.style.display='block';
+    popup.style.animation='none';popup.offsetHeight;popup.style.animation='shake .3s ease';
+    return;
+  }
+  const wasApproved = (target===2 && state[id]!==2);
+  const prev = state[id];
+  state[id] = target;
+  if(target < prev) cascadeReset(id, target);
+  save();render();
+  if(isMobile()){
+    closePopup();
+    if(wasApproved) requestAnimationFrame(()=>{
+      const card=document.querySelector(`[data-id="${id}"]`);
+      if(card) celebrate(card);
+    });
+  } else {
+    const card=document.querySelector(`[data-id="${id}"]`);
+    if(card){
+      openPopup(id,card);
+      if(wasApproved) celebrate(card);
+    }
+  }
+}
+function resetAll(){
+  Object.keys(state).forEach(id=>state[id]=0);
+  save();render();closePopup();
+}
+
+render();
+requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('loaded')));
+</script>
+</body>
+</html>
